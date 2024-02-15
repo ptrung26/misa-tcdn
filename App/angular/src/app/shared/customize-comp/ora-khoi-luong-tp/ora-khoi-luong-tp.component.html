@@ -1,0 +1,13 @@
+<div class="wrap">
+    <button nz-tooltip="Chuyển đổi chế độ (Lựa chọn/Nhập số)" class="btn-swap" nz-button nzType="link" nzSize="large"
+            (click)="changeMode()">
+        <i class="iconswap" nz-icon nzType="swap" nzTheme="outline"></i>
+    </button>
+
+<!--    <ora-number-rollback class="input" [(ngModel)]="_value" (valueChange)="onChangeValue($event)" *ngIf="isModeInput">-->
+<!--    </ora-number-rollback>-->
+        <nz-input-number nzMin="0"  class="input" [(ngModel)]="_value" (ngModelChange)="onChangeValue($event)" *ngIf="isModeInput"></nz-input-number>
+    <nz-select class="select" [(ngModel)]="_value" *ngIf="!isModeInput" (ngModelChange)="onChangeValue($event)">
+        <nz-option *ngFor="let option of sourceKT" [nzLabel]="option.displayText" [nzValue]="option.value"></nz-option>
+    </nz-select>
+</div>

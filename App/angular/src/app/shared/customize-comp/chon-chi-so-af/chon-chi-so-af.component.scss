@@ -1,0 +1,11 @@
+.point {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    .text {
+        border-bottom: 1px dashed #717171;
+        display: flex;
+        align-items: center;
+    }
+}

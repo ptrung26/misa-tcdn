@@ -1,0 +1,18 @@
+<nz-table nzTemplateMode>
+    <thead>
+    <tr>
+        <th nzAlign="center">Nguyên liệu</th>
+        <th nzAlign="center">Lượng sống sạch</th>
+        <th nzAlign="center">Lượng đi chợ</th>
+        <th nzAlign="center">Năng lượng (Kcal)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let dataItem of dataSource">
+        <td>{{dataItem.tenThucPham|uppercaseFirstWord}}</td>
+        <td nzAlign="center">{{dataItem.khoiLuongSong|oraNumber:'.0-' + (dataItem.slPhanThapPhan ? dataItem.slPhanThapPhan : 2)}} {{dataItem.donVi}}</td>
+        <td nzAlign="center">{{dataItem.khoiLuongDiCho|oraNumber:'.0-' + (dataItem.slPhanThapPhan ? dataItem.slPhanThapPhan : 2)}} g</td>
+        <td nzAlign="center">{{dataItem.nangLuongKcal|oraNumber:'.0-0'}}</td>
+    </tr>
+    </tbody>
+</nz-table>

@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common.props"></Import>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>newPSG.PMS</RootNamespace>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="AppCore\**" />
+    <EmbeddedResource Remove="AppCore\**" />
+    <None Remove="AppCore\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Abp" Version="5.2.0" />
+    <PackageReference Include="Abp.Zero.Common" Version="5.2.0" />
+  </ItemGroup>
+</Project>

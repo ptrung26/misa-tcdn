@@ -1,0 +1,16 @@
+<page-header [title]="title">
+    <ng-template #title>
+        {{'Dashboard' | localize}}
+        <span class="text-sm text-grey-dark">
+            <nz-divider nzType="vertical"></nz-divider>
+            {{'HostDashboardHeaderInfo' | localize}}
+        </span>
+    </ng-template>
+</page-header>
+<nz-card [nzBordered]="false">
+
+    <ora-list-switch [(ngModel)]="vlTest" [dataSource]="dataSource"></ora-list-switch>
+
+    <!--    <ora-switch [(ngModel)]="vlTest" title="Cơm chay"></ora-switch>-->
+    vlTest: {{vlTest}}
+</nz-card>

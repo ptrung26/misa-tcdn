@@ -1,0 +1,95 @@
+CAP NHAT SAU
+<!--<ng-container *ngIf="showData">-->
+<!--    <div *ngIf="showHeader">-->
+<!--        <div class="row form-group">-->
+<!--            <div class="col-md-12">-->
+<!--                <h4 class="kt-portlet__head-title kt-align-center"><span-->
+<!--                    class="uppercase bold">Danh sách thực phẩm <span-->
+<!--                    *ngIf="listDieuKienFlat.length>0">chứa </span></span>-->
+<!--                </h4>-->
+<!--                <div class="kt-portlet__head-title kt-align-center italic">-->
+<!--                    <h6>-->
+<!--                        <ng-container *ngFor="let dieuKien of listDieuKienFlat; index as i">-->
+<!--                            <p> {{dieuKien}} </p>-->
+<!--                        </ng-container>-->
+<!--                    </h6>-->
+<!--                </div>-->
+
+<!--                <h6 class="kt-portlet__head-title kt-align-center bold">Hàm lượng có-->
+<!--                    trong {{filterView.khoiLuongPhanAnDuoc}}g thực-->
+<!--                    phẩm</h6>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <label>Tổng số: {{nzTable.totalCount}} thực phẩm</label>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;table nhieu duong chat&ndash;&gt;-->
+<!--    <nz-table #refTable [nzData]="nzTable.items" nzShowSizeChanger [nzFrontPagination]="false"-->
+<!--              [nzShowPagination]="isShowPagination"-->
+<!--              [nzShowTotal]="totalTpl"-->
+<!--              [nzLoading]="nzTable.loading" [nzTotal]="nzTable.totalCount"-->
+<!--              [(nzPageIndex)]="nzTable.pageIndex" [(nzPageSize)]="nzTable.pageSize"-->
+<!--              [nzPageSizeOptions]="nzTable.defaultPageOptions"-->
+<!--              [nzScroll]="{ x: '100px'}"-->
+<!--              nzBordered="true" (nzPageIndexChange)="onPageChange(false)" (nzPageSizeChange)="onPageChange(true)">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th nzWidth="50px" style="min-width: 50px" nzLeft="0px" nzAlign="center">STT</th>-->
+<!--            <th style="min-width: 80px" nzWidth="80px" nzLeft="50px" nzAlign="center"><span>Mã số</span><br/><span>(Code)</span>-->
+<!--            </th>-->
+<!--            <th style="min-width: 350px" nzWidth="350px" nzLeft="130px" nzAlign="center">Thực phẩm</th>-->
+<!--            <th nzWidth="90px" class="text-center">Năng lượng (Kcal)</th>-->
+<!--            <ng-container *ngFor="let dc of listHeaderDinhDuong">-->
+<!--                <th nzAlign="center" [nzWidth]="getWidthTh(dc!.tenDinhDuong)">-->
+<!--                    {{dc!.tenDinhDuong}}<br>-->
+<!--                    ({{dc!.donVi}})-->
+<!--                </th>-->
+<!--            </ng-container>-->
+
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr *ngFor="let dataItem of refTable.data;index as i;trackBy: trackByFn"-->
+<!--            (click)="this.selectThucPhamViewDetail(dataItem)">-->
+<!--            <td nzAlign="center" style="min-width: 50px" nzLeft="0px">{{nzTable.getSkipCount() + i + 1}}</td>-->
+<!--            <td nzAlign="center" style="min-width: 80px" nzLeft="50px">{{dataItem.maThucPham}}</td>-->
+
+<!--            <td style="min-width: 350px" nzLeft="130px">-->
+<!--                <div class="thuc-pham-ct">-->
+<!--                    <div class="ten">-->
+<!--                        <a class="kt-font-info uppercase bold" style="color:black">-->
+<!--                            {{dataItem.tenThucPham}}-->
+<!--                        </a>-->
+<!--                        <span style="width: 100px;margin-left: 10px;padding: 4px;">-->
+<!--                                        <span class="btn btn-bold btn-sm btn-font-sm  btn-label-success">-->
+<!--                                         {{dataItem.nhomThucPham}}-->
+<!--                                        </span>-->
+<!--                        </span>-->
+<!--                    </div>-->
+<!--                    <div class="action" *ngIf="showAction">-->
+<!--                        <button nzSize="small" nz-button nzType="default" title="Xem chi tiết thực phẩm" tabIndex="-1"-->
+<!--                                (click)="xemChiTietTp(dataItem.thucPhamId)">-->
+<!--                            <i nz-icon nzType="info-circle" nzTheme="outline"></i>-->
+<!--                        </button>-->
+
+<!--                        <button class="margin-left-5" nzSize="small" nz-button nzType="default" title="Thêm thực phẩm"-->
+<!--                                tabIndex="-1"-->
+<!--                                (click)="themThucPham(dataItem.thucPhamId)">-->
+<!--                            <i nz-icon nzType="plus" nzTheme="outline"></i>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </td>-->
+<!--            <td class="text-right"><span class="kt-font-danger kt-font-bold"-->
+<!--                                         style="margin-right: 10px;">{{dataItem.nangLuongKcal |oraNumberV2:0}}</span>-->
+<!--            </td>-->
+<!--            <td *ngFor="let dc of dataItem.thanhPhanDinhDuong" nzAlign="right">-->
+<!--                <span>{{dc.hamLuong | oraNumberV2: dc.slPhanThapPhan}}</span>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </nz-table>-->
+<!--</ng-container>-->
+<!--<ng-template #totalTpl let-range="range" let-total>-->
+<!--    <span class="kt-font-primary kt-font-bold">Tổng số bản ghi: {{total}}</span>-->
+<!--</ng-template>-->

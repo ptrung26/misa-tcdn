@@ -1,0 +1,45 @@
+version: "3"
+services:
+  ##########################################
+  ############# REDIS ######################
+  ##########################################
+  redis_app:
+    restart: always
+    image: redis
+    container_name: redis_app
+    expose:
+      - 6379
+    networks:
+      - nutifood_app
+
+  ##########################################################
+  ############# API-PPOS-NET-CLIENT-SYNC ################
+  ##########################################################
+  nutifood_backend:
+    restart: always
+    container_name: nutifood_backend
+    build: ./outputs/Host
+    networks:
+      - nutifood_app
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Staging
+    ports:
+      - "6060:80"
+
+  ##########################################################
+  ############# API-PPOS-NET-CLIENT-SYNC ################
+  ##########################################################
+  nutifood_angular:
+    restart: always
+    container_name: nutifood_angular
+    build: ./outputs/ng
+    networks:
+      - nutifood_app
+    volumes:
+      - "./nginx.conf:/etc/nginx/nginx.conf:ro"
+    ports:
+      - "9902:80"
+
+networks:
+  nutifood_app:
+    driver: bridge

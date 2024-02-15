@@ -1,0 +1,39 @@
+<div class="form-area">
+    <input [formControl]="filterContr" class="search__input" type="text"
+           placeholder="Nhập tên chức năng để tìm kiếm...">
+</div>
+<nz-card>
+    <nz-row nzGutter="16">
+        <nz-col nzSpan="6">
+            <ul class="ul-root">
+                <li class="menu-item" *ngFor="let dataItem of $menuSource|async; index as i"
+                    [class.menu-active]="($indexItemSelected|async)===i">
+                    <div class="content menu-sub" (click)="onClickMenu(dataItem, i)">
+                        <div class="title">
+                            <img *ngIf="dataItem.iconSrc" class="img-icon" [src]="getImgLink(dataItem.iconSrc)">
+                            <span class="margin-left-5">{{dataItem.title|localize}}</span>
+                        </div>
+                        <div class="extend">
+                            <nz-tag [nzColor]="'green'">{{dataItem.totalItem}}</nz-tag>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nz-col>
+        <nz-col nzSpan="18">
+            <nz-list nzItemLayout="horizontal">
+                <nz-list-item *ngFor="let dataItem of $menuItems |async" (click)="addTab(dataItem)" class="item-menu">
+                    <nz-list-item-meta
+                        [nzAvatar]="getImgLink(dataItem.iconSrc)"
+                    >
+                        <nz-list-item-meta-title>
+                            {{dataItem.title|localize}}
+                        </nz-list-item-meta-title>
+                    </nz-list-item-meta>
+                </nz-list-item>
+                <nz-list-empty *ngIf="($menuItems|async).length === 0"></nz-list-empty>
+            </nz-list>
+        </nz-col>
+    </nz-row>
+
+</nz-card>

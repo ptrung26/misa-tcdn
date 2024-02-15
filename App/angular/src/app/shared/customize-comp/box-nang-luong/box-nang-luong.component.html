@@ -1,0 +1,16 @@
+<div class="wrap">
+    <div class="header">
+        {{header}}
+    </div>
+    <div class="nang-luong">
+        <div class="content-nl">
+        <span class="value" counto [step]="50" [countTo]="nangLuong" [countFrom]="oldNumber"
+              [duration]="1" (countoChange)="currentNumber = $event"
+              (countoEnd)="oldNumber = currentNumber"
+        >
+            {{currentNumber | oraNumber:'.0-0'}}</span>
+            <span class="don-vi">Kcal</span>
+        </div>
+    </div>
+
+</div>

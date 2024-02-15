@@ -1,0 +1,48 @@
+.wrap {
+    height: 100%;
+    padding: 5px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(84.85deg, #13D288 35.43%, #AFEC9E 96.71%);
+        border-radius: 14px 14px 0 0;
+    }
+
+    .nang-luong {
+        //margin: 10px;
+        height: 100%;
+        background: #D8F8E2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0px 0px 14px 14px;
+
+
+        //border-radius: 5px;
+
+        .value {
+            color: red;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            display: block;
+        }
+
+        .don-vi {
+            color: #214dff;
+            font-size: 14px;
+            text-align: center;
+            font-weight: bold;
+            display: block;
+        }
+    }
+}
+

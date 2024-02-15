@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:base="clr-namespace:newPSG.PMS.ViewModels.Base;assembly=newPSG.PMS.Mobile.Shared"
+             x:Class="newPSG.PMS.Views._SampleView"
+             base:ViewManager.AutoWireViewModel="true">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="This is sample empty page for PMS!"
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

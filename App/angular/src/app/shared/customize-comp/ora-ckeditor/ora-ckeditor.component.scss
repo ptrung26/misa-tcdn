@@ -1,0 +1,43 @@
+
+.ck.ck-editor__editable {
+    z-index: 1
+}
+
+:host ::ng-deep {
+    p {
+        margin: 0;
+    }
+
+    .table {
+        td {
+            vertical-align: inherit;
+        }
+
+        th {
+            vertical-align: inherit;
+        }
+    }
+    ul, ol, dl {
+        margin: 0;
+    }
+    h4 {
+        margin-top: 12px;
+        margin-bottom: 6px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    p {
+        margin-top: 6px;
+        margin-bottom: 6px;
+    }
+
+}
+
+.content-ora.ck-blurred.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-read-only {
+    border: none;
+    padding: 0;
+    min-height: auto;
+
+}
+
+

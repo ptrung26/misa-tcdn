@@ -1,0 +1,33 @@
+.flexbox-parent {
+    display: flex;
+    width: 75%;
+    margin-bottom: 10px;
+}
+
+.nang-luong {
+    margin: 10px;
+    height: 100%;
+    background: #defae1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    max-height: 150px;
+    .value {
+        color: red;
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+        display: block;
+    }
+
+    .don-vi {
+        color: #214dff;
+        font-size: 14px;
+        text-align: center;
+        font-weight: bold;
+        display: block;
+    }
+}

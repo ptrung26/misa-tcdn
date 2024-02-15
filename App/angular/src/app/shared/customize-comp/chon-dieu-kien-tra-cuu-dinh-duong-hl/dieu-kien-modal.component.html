@@ -1,0 +1,59 @@
+<form nz-form [formGroup]="rfFormGroup" nzLayout="vertical">
+    <nz-form-item>
+        <nz-form-label nzRequired>Chất tra cứu</nz-form-label>
+        <nz-form-control nzErrorTip="Giá trị bắt buộc!">
+            <nz-select nzAllowClear
+                       [compareWith]="compareFn"
+                       formControlName="dinhDuong"
+                       nzPlaceHolder="Chọn dinh dưỡng"
+                       nzShowSearch
+                       nzServerSearch
+                       (nzOnSearch)="searchDinhDuongCombo($event)">
+                <nz-option *ngFor="let option of dinhDuongOptionList" [nzValue]="option"
+                           [nzLabel]="option.displayText"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-row nzGutter="16">
+        <nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label>Ngưỡng tối thiểu
+                    <span *ngIf="rfFormGroup.get('donVi').value">({{rfFormGroup.get('donVi').value}})</span>
+                </nz-form-label>
+                <nz-form-control nzErrorTip="Giá trị bắt buộc!">
+                    <nz-input-number style="width:100%" formControlName="min" [nzMin]="0"></nz-input-number>
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+        <nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label>Ngưỡng tối đa
+                    <span *ngIf="rfFormGroup.get('donVi').value">({{rfFormGroup.get('donVi').value}})</span>
+                </nz-form-label>
+                <nz-form-control [nzErrorTip]="minmaxTpl">
+                    <nz-input-number style="width:100%" formControlName="max" [nzMin]="0"></nz-input-number>
+                    <ng-template #minmaxTpl let-control>
+                        <ng-container *ngIf="control.hasError('errMinMax')">
+                            Ngưỡng tối đa không được nhỏ hơn ngưỡng tối thiểu
+                        </ng-container>
+                    </ng-template>
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+        <ng-container *ngIf="rfFormGroup.get('min').dirty || rfFormGroup.get('max').dirty">
+              <span class="italic text-danger" *ngIf="rfFormGroup.getError('required')">
+            Cần nhập ít nhất một giá trị ngưỡng tối thiểu/ngưỡng tối đa!
+        </span>
+            <span class="italic text-danger margin-left-5" *ngIf="rfFormGroup.getError('errMinMax')">
+           Ngưỡng tối thiểu không được vượt quá ngưỡng tối đa
+        </span>
+        </ng-container>
+    </nz-row>
+    <p class="margin-top-15">
+        <strong>* Để ngưỡng tối thiểu = ngưỡng tối đa, nếu muốn tra cứu hàm lượng bằng một giá trị nhất định</strong>
+    </p>
+    <div *nzModalFooter>
+        <button type="button" nz-button nzType="default" (click)="handleCancel()">Đóng</button>
+        <button type="button" nz-button nzType="primary" (click)="handleOk()">Lưu</button>
+    </div>
+</form>

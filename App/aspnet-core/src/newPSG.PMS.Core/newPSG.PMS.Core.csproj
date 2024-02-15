@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common.props"></Import>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AssemblyName>newPSG.PMS.Core</AssemblyName>
+    <PackageId>newPSG.PMS.Core</PackageId>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <UserSecretsId>newPSG-PMS-894FDFC1-6482-4A56-926A-3C46C9FE0329</UserSecretsId>
+    <RootNamespace>newPSG.PMS</RootNamespace>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\PMS\*.xml;Net\Emailing\EmailTemplates\default.html" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MicroOrm.Dapper.Repositories" Version="1.14.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.1" />
+    <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.3.1" />
+    <PackageReference Include="MySql.Data" Version="8.0.19" />
+    <PackageReference Include="PayPalHttp" Version="1.0.0" />
+    <PackageReference Include="Stripe.net" Version="34.23.0" />
+    <PackageReference Include="PayPalCheckoutSdk" Version="1.0.3" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.0" />
+    <PackageReference Include="TimeZoneConverter" Version="3.2.0" />
+    <PackageReference Include="Abp.AspNetZeroCore" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Abp.ZeroCore.IdentityServer4.EntityFrameworkCore" Version="5.2.0" />
+    <PackageReference Include="Abp.AutoMapper" Version="5.2.0" />
+    <PackageReference Include="Abp.MailKit" Version="5.2.0" />
+    <PackageReference Include="Abp.Zero.Ldap" Version="5.2.0" />
+    <PackageReference Include="Twilio" Version="5.37.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\newPSG.PMS.Core.Shared\newPSG.PMS.Core.Shared.csproj" />
+  </ItemGroup>
+</Project>

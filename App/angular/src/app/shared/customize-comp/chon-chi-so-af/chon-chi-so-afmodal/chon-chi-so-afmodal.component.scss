@@ -1,0 +1,19 @@
+:host ::ng-deep {
+    .ant-radio-wrapper {
+        white-space: inherit;
+    }
+}
+
+table th {
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+}
+
+table td {
+    cursor: pointer;
+}
+
+table th.active, td.active {
+    background: aliceblue;
+}

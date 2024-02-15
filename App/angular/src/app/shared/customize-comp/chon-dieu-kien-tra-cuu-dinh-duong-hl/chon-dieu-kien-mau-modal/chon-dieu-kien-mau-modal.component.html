@@ -1,0 +1,43 @@
+<nz-row nzGutter="8">
+    <nz-col nzSpan="12">
+        <nz-card nzSize="small" nzTitle="Danh sách điều kiện">
+            <nz-row class="margin-bottom-15">
+                <nz-col nzSpan="24">
+                    <input [formControl]="controlFilter" type="text" nz-input
+                           placeholder="Tìm kiếm theo tên điều kiện..."/>
+                </nz-col>
+            </nz-row>
+            <nz-table #table [nzData]="dataSource" nzShowSizeChanger [nzFrontPagination]="true"
+                      [nzLoading]="loading" [nzTotal]="dataSource.length"
+                      nzBordered="true">
+                <thead>
+                <tr>
+                    <th width="20px">STT</th>
+                    <th>Tên điều kiện</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let dataItem of table.data;index as i; trackBy: trackById" (click)="onClickRow(dataItem)"
+                    [class.isSelected]="idSelected===dataItem.id">
+                    <td>{{i + 1}}</td>
+                    <td>
+                        {{dataItem.ten}}
+                    </td>
+                </tr>
+                </tbody>
+            </nz-table>
+<!--            <ng-template #totalTpl let-range="range" let-total>-->
+<!--                <span class="kt-font-primary kt-font-bold">Tổng số bản ghi: {{total}}</span>-->
+<!--            </ng-template>-->
+        </nz-card>
+    </nz-col>
+    <nz-col nzSpan="12">
+        <nz-card nzTitle="Điều kiện đã chọn: {{tenDkDaChon}}" nzSize="small" *ngIf="dieuKienDaChon">
+            <chon-dieu-kien-tra-cuu-dinh-duong [(ngModel)]="dieuKienDaChon"></chon-dieu-kien-tra-cuu-dinh-duong>
+        </nz-card>
+    </nz-col>
+</nz-row>
+<div *nzModalFooter>
+    <button type="button" nz-button nzType="default" (click)="close()">Đóng</button>
+    <button type="submit" nz-button nzType="primary" (click)="save()" [disabled]="!dieuKienDaChon">Chọn</button>
+</div>

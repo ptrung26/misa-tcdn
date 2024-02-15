@@ -1,0 +1,36 @@
+<form nz-form [formGroup]="rfDataModal" nzLayout="horizontal">
+    <nz-form-item>
+        <nz-form-label nzFor="tenVi" [nzSm]="8" nzRequired>Tên (Vi)</nz-form-label>
+        <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+            <input nz-input formControlName="tenVi"/>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label nzFor="tenEn" [nzSm]="8">Tên (En)</nz-form-label>
+        <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+            <input nz-input formControlName="tenEn"/>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label nzFor="loai" [nzSm]="8" nzRequired>Loại</nz-form-label>
+        <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+            <ora-select dirLoaiNhomDinhDuong formControlName="loai"></ora-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label nzFor="isActive" [nzSm]="8">Trạng thái</nz-form-label>
+        <nz-form-control [nzSm]="16">
+            <label nz-checkbox formControlName="isActive"></label>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-control>
+            <div *nzModalFooter>
+                <button type="button" nz-button nzType="default" (click)="close()">Đóng</button>
+                <button type="submit" [nzLoading]="saving" nz-button nzType="primary" (click)="save()"><i nz-icon
+                                                                                                          nzType="save"></i>Lưu
+                </button>
+            </div>
+        </nz-form-control>
+    </nz-form-item>
+</form>

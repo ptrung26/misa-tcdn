@@ -1,0 +1,26 @@
+<thong-tin-dinh-duong-tom-tat
+    [isShowAnh]="isShowAnh"
+    [hinhAnhId]="hinhAnhId"
+    [moTaAnh]="moTaAnh"
+    [moTaAnh2]="moTaAnh2"
+    [titleAnh]="titleAnh"
+    [srcImgDefault]="srcImgDefault"
+    [nangLuong$]="nangLuong$"
+    [ttDam$]="ttDam$"
+    [ttBotDuong$]="ttBotDuong$"
+    [ttChatBeo$]="ttChatBeo$"
+    [ttAlco$]="ttAlco$"
+    [showLegendBD]="showLegendBD"
+></thong-tin-dinh-duong-tom-tat>
+<ng-container *ngIf="thanhPhanThucPham">
+    <div class="margin-bottom-15"></div>
+    <h6 class="text-primary">Thành phần thực phẩm của món ăn</h6>
+    <thanh-phan-thuc-pham-mon-an [thanhPhanThucPham]="thanhPhanThucPham"></thanh-phan-thuc-pham-mon-an>
+</ng-container>
+<div class="margin-bottom-15"></div>
+<h6 class="text-primary">Thành dinh dưỡng</h6>
+<thanh-phan-dinh-duong-ma
+    [dinhDuongFromMa$]="dinhDuongFromMa$"></thanh-phan-dinh-duong-ma>
+<div *nzModalFooter>
+    <button type="button" nz-button nzType="default" (click)="close()">Đóng</button>
+</div>

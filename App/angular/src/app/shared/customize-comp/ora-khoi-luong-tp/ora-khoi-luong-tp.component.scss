@@ -1,0 +1,27 @@
+.wrap {
+    position: relative;
+
+    .btn-swap {
+        position: absolute;
+        top: -5px;
+        right: 20px;
+        z-index: 4;
+    }
+
+    .input, .select {
+        z-index: 3;
+        width: 100%
+    }
+
+    .input {
+
+    }
+}
+:host ::ng-deep{
+    .ant-btn-link{
+        color: #aad0d2;
+    }
+    .ant-btn-link:hover{
+        color: #00565a;
+    }
+}

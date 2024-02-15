@@ -1,0 +1,184 @@
+<nz-table #basicTable nzTemplateMode nzShowPagination="false" nzBordered="true" [nzScroll]="{ y: '450px' }">
+    <thead>
+    <tr>
+        <th nzAlign="center">Thành phần dinh dưỡng<br/>(Nutrients)</th>
+        <th nzAlign="center" nzWidth="100px">Hàm lượng<br/>(Value)</th>
+        <th nzAlign="center" nzWidth="80px">Đơn vị<br/>(Unit)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Group res_NL-->
+    <ng-container
+        [ngTemplateOutlet]="defaultTemplate"
+        [ngTemplateOutletContext]="{$implicit: res_NL}">
+    </ng-container>
+
+    <!-- Start  res_AcidAmin-->
+    <ng-container
+        [ngTemplateOutlet]="templateWithDetail"
+        [ngTemplateOutletContext]="{$implicit: res_AcidAmin}">
+    </ng-container>
+    <!-- End  res_AcidAmin-->
+
+    <!-- Group res_NL2-->
+    <ng-container
+        [ngTemplateOutlet]="defaultTemplate"
+        [ngTemplateOutletContext]="{$implicit: res_NL2}">
+    </ng-container>
+    <!-- End Group res_NL2-->
+
+    <!-- Start  res_CacLoaiDuong-->
+    <ng-container
+        [ngTemplateOutlet]="templateWithDetail"
+        [ngTemplateOutletContext]="{$implicit: res_CacLoaiDuong}">
+    </ng-container>
+    <!-- End  res_CacLoaiDuong-->
+
+
+    <!-- Group res_ChatKhoang-->
+    <tr>
+        <td colspan="3" class="bold background-0">Các khoáng chất (Minerals)</td>
+    </tr>
+    <ng-container
+        [ngTemplateOutlet]="defaultTemplate"
+        [ngTemplateOutletContext]="{$implicit: res_ChatKhoang}">
+    </ng-container>
+    <!-- End Group res_ChatKhoang-->
+
+    <!-- Group res_Vitamin-->
+    <tr>
+        <td colspan="3" class="bold background-0">Vitamin (Vitamins & Provitamins)</td>
+    </tr>
+    <ng-container
+        [ngTemplateOutlet]="defaultTemplate"
+        [ngTemplateOutletContext]="{$implicit: res_Vitamin}">
+    </ng-container>
+    <!-- End Group res_Vitamin-->
+
+
+    <!-- Start  res_Carotenoid-->
+    <ng-container
+        [ngTemplateOutlet]="templateWithDetail"
+        [ngTemplateOutletContext]="{$implicit: res_Carotenoid}">
+    </ng-container>
+    <!-- End  res_Carotenoid-->
+
+    <!-- Group res_Putin-->
+    <ng-container
+        [ngTemplateOutlet]="defaultTemplate"
+        [ngTemplateOutletContext]="{$implicit: res_Putin,trClass:'background-0'}">
+    </ng-container>
+    <!-- End Group res_Putin-->
+
+    <!-- Group res_TongIsofavon-->
+    <ng-container
+        [ngTemplateOutlet]="defaultTemplate"
+        [ngTemplateOutletContext]="{$implicit: res_TongIsofavon}">
+    </ng-container>
+    <!-- End Group res_TongIsofavon-->
+
+    <!-- Start  res_Isoflavon-->
+    <ng-container
+        [ngTemplateOutlet]="templateWithDetail"
+        [ngTemplateOutletContext]="{$implicit: res_Isoflavon}">
+    </ng-container>
+    <!-- End  res_Isoflavon-->
+
+    <!-- Group res_TongAcidBeoNo-->
+    <ng-container
+        [ngTemplateOutlet]="defaultTemplate"
+        [ngTemplateOutletContext]="{$implicit: res_TongAcidBeoNo}">
+    </ng-container>
+    <!-- End Group res_TongAcidBeoNo-->
+
+    <!-- Start  res_AcidBeoNo-->
+    <ng-container
+        [ngTemplateOutlet]="templateWithDetail"
+        [ngTemplateOutletContext]="{$implicit: res_AcidBeoNo}">
+    </ng-container>
+    <!-- End  res_AcidBeoNo-->
+
+    <!-- Group res_TongAcidBeoKhongNo1NoiDoi-->
+    <ng-container
+        [ngTemplateOutlet]="defaultTemplate"
+        [ngTemplateOutletContext]="{$implicit: res_TongAcidBeoKhongNo1NoiDoi}">
+    </ng-container>
+    <!-- End Group res_TongAcidBeoKhongNo1NoiDoi-->
+
+    <!-- Start  res_AcidBeoKhongNo1NoiDoi-->
+    <ng-container
+        [ngTemplateOutlet]="templateWithDetail"
+        [ngTemplateOutletContext]="{$implicit: res_AcidBeoKhongNo1NoiDoi}">
+    </ng-container>
+    <!-- End  res_AcidBeoKhongNo1NoiDoi-->
+
+    <!-- Group res_TongAcidKhongBeoNoNhieuNoiDoi-->
+    <ng-container
+        [ngTemplateOutlet]="defaultTemplate"
+        [ngTemplateOutletContext]="{$implicit: res_TongAcidBeoKhongNoNhieuNoiDoi}">
+    </ng-container>
+    <!-- End Group res_TongAcidKhongBeoNoNhieuNoiDoi-->
+
+    <!-- Start  res_AcidBeoKhongNoNhieuNoiDoi-->
+    <ng-container
+        [ngTemplateOutlet]="templateWithDetail"
+        [ngTemplateOutletContext]="{$implicit: res_AcidBeoKhongNoNhieuNoiDoi}">
+    </ng-container>
+    <!-- End  res_AcidBeoKhongNoNhieuNoiDoi-->
+
+    <!-- Group res_AcidTrans-->
+    <ng-container
+        [ngTemplateOutlet]="defaultTemplate"
+        [ngTemplateOutletContext]="{$implicit: res_AcidTrans}">
+    </ng-container>
+    <!-- End Group res_AcidTrans-->
+
+    <!-- Group res_CholesteroL-->
+    <ng-container
+        [ngTemplateOutlet]="defaultTemplate"
+        [ngTemplateOutletContext]="{$implicit: res_CholesteroL}">
+    </ng-container>
+    <!-- End Group res_CholesteroL-->
+
+    <!-- Group res_Phytosterol-->
+    <ng-container
+        [ngTemplateOutlet]="defaultTemplate"
+        [ngTemplateOutletContext]="{$implicit: res_Phytosterol}">
+    </ng-container>
+    <!-- End Group res_Phytosterol-->
+
+    </tbody>
+</nz-table>
+<ng-template #defaultTemplate let-option let-trClass="trClass">
+    <tr *ngFor="let item of option" [ngClass]="trClass">
+        <td class="padding-left-35"><span class="bold">{{item.tenDinhDuongVi}} </span>
+            <span class="italic"
+                  *ngIf="item.tenDinhDuongEn">({{item.tenDinhDuongEn}})</span></td>
+        <td class="italic" nzAlign="center">{{item.hamLuong |oraNumberV2 :item.slPhanThapPhan}}</td>
+        <td class="italic" nzAlign="center">{{item.tenDonVi}}</td>
+    </tr>
+</ng-template>
+<ng-template #templateWithDetail let-option>
+    <tr *ngIf="option.data.length>0" [hidden]="isPrintting">
+        <td class="padding-left-35">
+                     <span (click)="option.isDetail = !option.isDetail" class="kt-font-info kt-font-bold"
+                           style="width:90% !important; display: inline-block; cursor: pointer">
+                           {{option.title}}
+                        </span>
+            <button nz-button nzType="link" type="button"
+                    (click)="option.isDetail = !option.isDetail">
+                <i nz-icon [nzType]="option.isDetail === false?'caret-right':'caret-down'"
+                   nzTheme="outline"></i>
+            </button>
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr *ngFor="let item of option.data" [hidden]="option.isDetail==false">
+        <td class="italic padding-left-35"><span class="bold">{{item.tenDinhDuongVi}} </span>
+            <span class="italic" *ngIf="item.tenDinhDuongEn">({{item.tenDinhDuongEn}})</span>
+        </td>
+        <td class="italic" nzAlign="center">{{item.hamLuong |oraNumberV2 :item.slPhanThapPhan}}</td>
+        <td class="italic" nzAlign="center">{{item.tenDonVi}}</td>
+    </tr>
+</ng-template>

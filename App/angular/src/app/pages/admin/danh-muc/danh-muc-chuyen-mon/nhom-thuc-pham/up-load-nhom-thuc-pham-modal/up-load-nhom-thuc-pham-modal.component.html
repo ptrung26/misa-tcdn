@@ -1,0 +1,90 @@
+<form nz-form [formGroup]="rfDataModal" nzLayout="horizontal">
+    <nz-row>
+        <nz-col nzSpan="12">
+            <!-- <nz-form-item>
+                <nz-form-label [nzSpan]="nzLabel" nzRequired>Nhóm thực phẩm</nz-form-label>
+                <nz-form-control [nzSpan]="nzForm" nzErrorTip="Giá trị bắt buộc!">
+                    <ora-select dirNhomThucPhamGiGl formControlName="nhomThucPhamId"></ora-select>
+                </nz-form-control>
+            </nz-form-item> -->
+        </nz-col>
+    </nz-row>
+
+    <nz-form-item>
+        <nz-form-control [nzSm]="24">
+            <nz-table nzTemplateMode>
+                <thead>
+                <tr>
+                    <th nzAlign="center" width="80px">STT</th>
+                    <th nzAlign="center">Lỗi</th>
+                    <th nzAlign="center">Tên (Vi)</th>
+                    <th nzAlign="center">Tên (En)</th>
+                    <th nzAlign="center">Loại nhóm thực phẩm</th>
+                    <th nzAlign="center">Mô tả</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *ngFor="let contr of datas.controls; index as i">
+                    <tr [formGroup]="contr">
+                        <td nzAlign="center">{{i + 1}}</td>
+                        <td class="text-danger">
+                            <!-- <pre>{{contr.value.listError | json}}</pre> -->
+                            {{contr.value.listError}}
+                        </td>
+                        <td>
+                            <nz-form-item>
+                                <nz-form-control nzErrorTip="Giá trị bắt buộc!">
+                                    <input nz-input formControlName="tenVi"/>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </td>
+                        <td>
+                            <nz-form-item>
+                                <nz-form-control nzErrorTip="Giá trị bắt buộc!">
+                                    <input nz-input formControlName="tenEn"/>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </td>
+                        <td nzAlign="center">
+                            <nz-form-item>
+                                <nz-form-control nzErrorTip="Giá trị bắt buộc!">
+                                    <input nz-input formControlName="strLoaiNhomThucPham"/>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </td>
+                        <td>
+                            <nz-form-item>
+                                <nz-form-control nzErrorTip="Giá trị bắt buộc!">
+                                    <textarea nz-input row="1" formControlName="moTa" nzAutosize style="width:100%"></textarea>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </td>
+                    </tr>
+                </ng-container>
+                </tbody>
+            </nz-table>
+        </nz-form-control>
+    </nz-form-item>
+</form>
+<div style="display: flex;justify-content: flex-end;margin-top: 10px">
+    <div class="text-danger italic font-weight-bold" *ngIf="rfDataModal.invalid">Dữ liệu không hợp lệ!</div>
+    <button class=" margin-left-15" nzType="dashed" nz-button (click)="checkValidData()">Kiểm tra dữ liệu</button>
+</div>
+<!-- <h6 class="text-danger italic underline">Ghi chú:</h6>
+<ul class="text-primary">
+    <li>Mã hệ thống : Là mã tự sinh trong danh mục thực phẩm GI GL <br/>
+        - Đễ trống hoặc giá trị = 0 sẽ Thêm mới <br/>
+        - Khác 0 sẽ cập nhật dựa theo mã truyền vào<br/>
+        - Trong trường hợp cập nhật cần đảm bảo "Mã hệ thống" đã tồn tại trên hệ thống
+    </li>
+    <li>
+        Mã thực phẩm (MaBTP2007): Là mã trong danh sách thực phẩm.<br/>
+        - Nó là duy nhất trong danh sách thực phẩm
+    </li>
+</ul> -->
+
+<div *nzModalFooter>
+    <button type="button" nz-button nzType="default" (click)="close()">Đóng</button>
+    <button [disabled]="rfDataModal.invalid" type="button" nz-button nzType="primary" (click)="save()">Nhập dữ liệu
+    </button>
+</div>

@@ -1,0 +1,26 @@
+<div nz-row nzJustify="center">
+
+    <div nz-col nzSpan="8" class="kt-align-center" *ngIf="isShowAnh">
+        <h4 class="kt-font-info kt-font-transform-u" style="font-size: 24px" *ngIf="titleAnh">
+            {{ titleAnh}}
+        </h4>
+        <h6 style="font-weight: bold;font-style: italic" *ngIf="moTaAnh">({{moTaAnh}})</h6>
+        <img [src]="_imgLink" class="img-upload"
+             [ngStyle]="{width:'auto', height:'200px'}"/>
+        <h6 style="font-weight: bold;font-style: italic;color:red;font-size: 1.3rem" class="margin-top-5"
+            *ngIf="moTaAnh2">{{moTaAnh2}}</h6>
+        <!--            <tra-cuu-img-thuc-pham [guideImg]="dataItem.imgBinaryObjectId"></tra-cuu-img-thuc-pham>-->
+    </div>
+    <div nz-col nzSpan="16">
+        <h5 class="kt-align-center"> Phân bố năng lượng từ các chất</h5>
+        <h6 class="kt-align-center kt-margin-b-30">Source of Calories</h6>
+        <bieu-do-dinh-duong
+            [nangLuong$]="nangLuong$"
+            [ttChatBeo$]="ttChatBeo$"
+            [ttBotDuong$]="ttBotDuong$"
+            [ttDam$]="ttDam$"
+            [ttAlco$]="ttAlco$"
+            [showLegend]="showLegendBD"
+        ></bieu-do-dinh-duong>
+    </div>
+</div>

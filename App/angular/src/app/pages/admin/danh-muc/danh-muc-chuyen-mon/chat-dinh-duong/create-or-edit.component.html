@@ -1,0 +1,66 @@
+<form nz-form [formGroup]="rfDataModal" nzLayout="horizontal">
+    <nz-form-item>
+        <nz-form-label nzFor="tenVi" [nzSm]="8" nzRequired>Tên (Vi)</nz-form-label>
+        <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+            <input nz-input formControlName="tenVi"/>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label nzFor="tenEn" [nzSm]="8" nzRequired>Tên (En)</nz-form-label>
+        <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+            <input nz-input formControlName="tenEn"/>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label nzFor="tenGoiKhac" [nzSm]="8">Tên gọi khác</nz-form-label>
+        <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+            <input nz-input formControlName="tenGoiKhac"/>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label nzFor="nhomDinhDuongId" [nzSm]="8" nzRequired>Nhóm Dinh Dương</nz-form-label>
+        <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+            <nhom-dinh-duong-combo formControlName="nhomDinhDuongId"></nhom-dinh-duong-combo>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label nzFor="donViMacDinhId" [nzSm]="8" nzRequired>Đơn vị mặc định</nz-form-label>
+        <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+            <don-vi-do-combo formControlName="donViMacDinhId"></don-vi-do-combo>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label nzFor="slPhanThapPhan" [nzSm]="8" nzRequired>Số lượng phần thập phân</nz-form-label>
+        <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+            <nz-input-number formControlName="slPhanThapPhan" style="width:100%"></nz-input-number>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label nzFor="orderBy" [nzSm]="8" nzRequired>Xếp theo (Code enum)</nz-form-label>
+        <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+            <ora-select dirCodeDinhDuong formControlName="orderBy"></ora-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label nzFor="stt" [nzSm]="8">Thứ tự</nz-form-label>
+        <nz-form-control [nzSm]="16" nzErrorTip="Giá trị bắt buộc!">
+            <nz-input-number formControlName="stt" style="width:100%"></nz-input-number>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label nzFor="isActive" [nzSm]="8" nzRequired>Trạng thái</nz-form-label>
+        <nz-form-control [nzSm]="16">
+            <label nz-checkbox formControlName="isActive"></label>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-control>
+            <div *nzModalFooter>
+                <button type="button" nz-button nzType="default" (click)="close()">Đóng</button>
+                <button type="submit" [nzLoading]="saving" nz-button nzType="primary" (click)="save()"><i nz-icon
+                                                                                                          nzType="save"></i>Lưu
+                </button>
+            </div>
+        </nz-form-control>
+    </nz-form-item>
+</form>

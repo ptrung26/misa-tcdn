@@ -1,0 +1,53 @@
+<form nz-form [formGroup]="rfDataModal">
+    <table class="table table-bordered table-kich-thuoc-kp" [ngStyle]="{'opacity':rfDataModal.get('isDelete').value?'0.5':'1'}">
+        <tr>
+            <td class="title-area">Tên đơn vị
+                <span style="color:red"> *</span>
+            </td>
+            <td>
+
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Giá trị không được để trống!">
+                        <input formControlName="tenDonVi"
+                               (blur)="onFocus($event)"
+                               style="border:none" placeholder="Tên đơn vị..." nz-input>
+                    </nz-form-control>
+                </nz-form-item>
+            </td>
+            <td width="15px" rowspan="3" class="delete-area">
+                <button nz-button nzType="link" (click)="onDeleteClick()"
+                        [disabled]="!alowDelete"
+                        type="button"
+                        tabIndex="-1"
+                        [title]="rfDataModal.get('isDelete').value?'Khôi phục':'Xóa'"
+                >
+                    <i nz-icon nzType="delete"
+                       [ngStyle]="{'color': rfDataModal.get('isDelete').value?'red':'black'}"></i>
+                </button>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="title-area">{{titleField2}} <span style="color:red"> *</span></td>
+            <td>
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Giá trị không được để trống!">
+                        <nz-input-number formControlName="khoiLuong" style="border:none;width: 100%"
+                                         (blur)="onFocus($event)"
+                                         [nzPlaceHolder]="titleField2"></nz-input-number>
+                    </nz-form-control>
+                </nz-form-item>
+
+            </td>
+        </tr>
+        <tr>
+            <td class="title-area">Là đơn vị mặc định <span style="color:red"> *</span></td>
+            <td>
+                <nz-form-item>
+                    <label nz-checkbox formControlName="isKTKPMacDinh"></label>
+                </nz-form-item>
+
+            </td>
+        </tr>
+    </table>
+</form>

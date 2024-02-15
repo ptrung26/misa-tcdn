@@ -1,0 +1,20 @@
+.delete-area {
+    text-align: center;
+    vertical-align: middle;
+    background-color: #fafafb;
+}
+
+td.title-area {
+    background-color: #fafafb;
+    vertical-align: middle;
+}
+
+.table-kich-thuoc-kp {
+    border: 1px solid #e7eaec
+}
+.ant-input-number-disabled{
+    background-color: inherit;
+}
+.ant-input[disabled]{
+    background-color: inherit;
+}

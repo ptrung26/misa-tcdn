@@ -1,0 +1,117 @@
+<nz-button-group *ngIf="listOfDieuKien.length===0">
+    <button type="button" nz-button nzType="dashed" class="hover-bg-blue"
+            (click)="showAddRootItemModal('')">+ Chọn điều kiện
+    </button>
+    <button type="button" nzType="dashed" nz-button nz-dropdown [nzDropdownMenu]="menu1" nzPlacement="bottomRight">
+        <i nz-icon nzType="ellipsis"></i>
+        <nz-dropdown-menu #menu1="nzDropdownMenu">
+            <ul nz-menu>
+                <li nz-menu-item (click)="showAddRootItemModal('')">Chọn điều kiện</li>
+                <li *ngIf="showChonDieuKienMau" nz-menu-item (click)="showChonDieuKienMauModal()">Chọn điều kiện mẫu</li>
+            </ul>
+        </nz-dropdown-menu>
+    </button>
+</nz-button-group>
+<div class="margin-bottom-5" nz-row nzGutter="8" nzAlign="top"
+     *ngFor="let itemRoot of listOfDieuKien;index as idxRoot">
+    <div nz-col nzMd="4">
+        <button nz-button nzType="default"
+                nz-popover
+                [nzPopoverContent]="itemRoot.loaiSoSanh===''?popThemDkRoot:popSuaDkRoot"
+                nzPopoverPlacement="bottomLeft" nzPopoverTrigger="click">
+            <i nz-icon nzType="plus" *ngIf="itemRoot.loaiSoSanh===''"></i>
+            <span *ngIf="itemRoot.loaiSoSanh==='or'">hoặc</span>
+            <span *ngIf="itemRoot.loaiSoSanh==='and'">và</span>
+            <ng-template #popThemDkRoot>
+                <button class="margin-right-5" nz-button
+                        nzType="default"
+                        (click)="showAddRootItemModal('and')">
+                    + và
+                </button>
+                <button (click)="showAddRootItemModal('or')"
+                        nz-button nzType="default">
+                    + hoặc
+                </button>
+            </ng-template>
+            <ng-template #popSuaDkRoot>
+                <button class="margin-right-5" nz-button
+                        nzType="default"
+                        (click)="changeLoaiSoSanhItemRoot(itemRoot,'and')">
+                    và
+                </button>
+                <button (click)="changeLoaiSoSanhItemRoot(itemRoot,'or')"
+                        nz-button nzType="default">
+                    hoặc
+                </button>
+            </ng-template>
+        </button>
+    </div>
+    <div nz-col nzMd="16">
+        <div class="btn-dash">
+            <div class="content" *ngFor="let itemChild of itemRoot.children;index as idxChild">
+                <button *ngIf="itemChild.loaiSoSanh"
+                        class="hover-bg-blue margin-right-5 font-small"
+                        nz-popover
+                        [nzPopoverContent]="popChangeLoaiSS"
+                        nzPopoverPlacement="bottomLeft" nzPopoverTrigger="click"
+                        nz-button nzType="default">
+                    <span *ngIf="itemChild.loaiSoSanh==='or'">hoặc</span>
+                    <span *ngIf="itemChild.loaiSoSanh==='and'">và</span>
+                    <ng-template #popChangeLoaiSS>
+                        <button (click)="changeLoaiSoSanh(itemChild, 'and')" class="margin-right-5"
+                                nz-button nzType="default">và
+                        </button>
+                        <button (click)="changeLoaiSoSanh(itemChild, 'or')"
+                                nz-button nzType="default">hoặc
+                        </button>
+                    </ng-template>
+                </button>
+                <button class="hover-border-red margin-right-5 font-small btn-pading-0" nz-button nzType="link"
+                        nz-popover
+                        [nzPopoverContent]="popSuaXoaItem"
+                        nzPopoverPlacement="bottomLeft" nzPopoverTrigger="click">
+                    {{itemChild.display}}
+                    <ng-template #popSuaXoaItem>
+                        <button class="hover-bg-blue margin-right-5" nz-button nzType="default"
+                                (click)="showEditChidModal(idxRoot, idxChild)">
+                            <i nz-icon nzType="edit"></i> Sửa
+                        </button>
+                        <button (click)="xoaItemLevel2(idxRoot, idxChild)" class="hover-bg-red" nz-button
+                                nzType="default" nzDanger>
+                            <i nz-icon nzType="close" nzTheme="outline"></i> Xóa
+                        </button>
+                    </ng-template>
+                </button>
+
+                <button nz-button
+                        *ngIf="idxChild===itemRoot.children.length-1"
+                        class="hover-bg-blue font-small" nzType="default"
+                        nz-popover
+                        [nzPopoverContent]="popThemDkLv2"
+                        nzPopoverPlacement="bottomLeft" nzPopoverTrigger="click">
+                    <i nz-icon nzType="plus"></i>
+                    <ng-template #popThemDkLv2>
+                        <button class="hover-bg-blue margin-right-5" nz-button nzType="default"
+                                (click)="showAddChildModal(itemRoot.children,'and')">
+                            + và
+                        </button>
+                        <button (click)="showAddChildModal(itemRoot.children,'or')" class="hover-bg-blue"
+                                nz-button
+                                nzType="default">
+                            + hoặc
+                        </button>
+                    </ng-template>
+                </button>
+
+            </div>
+        </div>
+    </div>
+    <nz-col nzMd="4">
+        <button (click)="deleteItemRoot(idxRoot)" type="button" class="hover-bg-red" nz-button nzType="default"
+                nzDanger><i nz-icon
+                            nzType="close"
+                            nzTheme="outline"></i>
+        </button>
+    </nz-col>
+</div>
+

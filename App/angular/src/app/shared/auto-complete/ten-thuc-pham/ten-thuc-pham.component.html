@@ -1,0 +1,11 @@
+<input type="text" placeholder="Nhập nội dung tìm kiếm..." nz-input [(ngModel)]="inputValue"
+       style="border-top-right-radius: 0;border-bottom-right-radius:0"
+       (input)="onChange($event)"
+       (ngModelChange)="valueChange.emit(inputValue)"
+       [nzAutocomplete]="auto"/>
+<nz-autocomplete #auto>
+    <nz-auto-option class="global-search-item" *ngFor="let option of options" [nzValue]="option.tenThucPham">
+        <span class="kt-font-bold uppercase">{{option.tenThucPham}}</span><br>
+        <span class="uppercase">{{ option.tenNhomThucPham }}</span>
+    </nz-auto-option>
+</nz-autocomplete>

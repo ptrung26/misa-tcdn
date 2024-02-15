@@ -1,0 +1,84 @@
+<ora-page-header [title]="'Pages_DanhMuc_GIGL'|localize" [action]="actionHeader">
+    <ng-template #actionHeader>
+    </ng-template>
+</ora-page-header>
+
+<ora-layout-filter (onSearch)="refresh()">
+    <form nz-form [formGroup]="rfFormGroup" nzLayout="vertical" (ngSubmit)="refresh()">
+        <nz-row nzGutter="8">
+            <nz-col nzLg="8" nzSm="12">
+                <nz-input-group [nzSuffix]="suffixIconSearch">
+                    <input formControlName="filter" nz-input placeholder="Tìm kiếm từ khóa"/>
+                    <ng-template #suffixIconSearch>
+                        <i nz-icon nzType="search"></i>
+                    </ng-template>
+                </nz-input-group>
+
+            </nz-col>
+            <nz-col nzLg="8" nzSm="12">
+                <nz-form-item>
+                    <!--                    <nz-form-label>Nhóm thực phẩm</nz-form-label>-->
+                    <nz-form-control>
+                        <nhom-thuc-pham-combo nzMode="multiple"
+                                              formControlName="listNhomThucPhamId"></nhom-thuc-pham-combo>
+                    </nz-form-control>
+                </nz-form-item>
+            </nz-col>
+        </nz-row>
+    </form>
+</ora-layout-filter>
+
+<nz-table [nzData]="dataList" nzShowSizeChanger [nzFrontPagination]="false"
+          [nzLoading]="isTableLoading" [nzTotal]="totalItems"
+          [nzShowTotal]="totalTpl"
+          [(nzPageIndex)]="pageNumber"
+          [(nzPageSize)]="pageSize"
+          nzBordered="true"
+          (nzPageIndexChange)="pageNumberChange()" (nzPageSizeChange)="refresh()">
+    <thead>
+    <tr>
+        <th nzAlign="center" width="10px">STT</th>
+        <th nzAlign="center" width="120px">Mã hệ thống</th>
+        <th>Tên thực phẩm</th>
+        <th>Nhóm thực phẩm</th>
+        <th nzAlign="center" width="160px">Lượng thực phẩm cho 1 phần ăn</th>
+        <th nzAlign="center" width="100px">GI</th>
+        <th nzAlign="center" width="100px">GL</th>
+        <th nzAlign="center" width="100px">Thao tác</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let dataItem of dataList;index as i">
+        <td class="text-center">{{skipCount + i + 1}}</td>
+        <td nzAlign="center">
+            {{dataItem.maBTP2007}}
+        </td>
+        <td>
+            {{dataItem.tenThucPham}}
+        </td>
+        <td>
+            {{dataItem.strNhomThucPham}}
+        </td>
+        <td nzAlign="center">
+            {{dataItem.serve}}
+        </td>
+        <td nzAlign="center">
+            {{dataItem.glycemicIndex}}
+        </td>
+        <td class="text-center">
+            {{dataItem.glycemicLoad}}
+        </td>
+        <td class="text-center">
+            <button nz-button nzType="link" [routerLink]="['/app/quan-ly-thuc-pham/thuc-pham',dataItem.thucPhamId]" title="Sửa">
+                <i nz-icon nzType="edit" nzTheme="outline"></i>
+            </button>
+            <button nz-button nzType="link" class="margin-left-5" (click)="delete(dataItem)" title="Xóa">
+                <i nz-icon nzType="delete" nzTheme="outline"></i>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</nz-table>
+<ng-template #totalTpl let-range="range" let-total>
+    <span class="kt-font-primary kt-font-bold">Tổng số bản ghi: {{total}}</span>
+</ng-template>

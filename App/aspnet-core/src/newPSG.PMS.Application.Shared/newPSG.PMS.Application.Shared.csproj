@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common.props"></Import>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>newPSG.PMS</RootNamespace>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="AppCore\DanhMucBase\**" />
+    <EmbeddedResource Remove="AppCore\DanhMucBase\**" />
+    <None Remove="AppCore\DanhMucBase\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Abp.Web.Common" Version="5.2.0" />
+    <PackageReference Include="FCM.Net.Core" Version="1.0.1" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.80.1" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="2.80.1" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Include="Telerik.Documents.Core" Version="2020.1.212" />
+    <PackageReference Include="Telerik.Documents.Fixed" Version="2020.1.212" />
+    <PackageReference Include="Telerik.Documents.Flow" Version="2020.1.212" />
+    <PackageReference Include="Telerik.Documents.Flow.FormatProviders.Pdf" Version="2020.1.212" />
+    <PackageReference Include="Telerik.Documents.Spreadsheet" Version="2020.1.212" />
+    <PackageReference Include="Telerik.Documents.Spreadsheet.FormatProviders.OpenXml" Version="2020.1.212" />
+    <PackageReference Include="Telerik.Documents.Spreadsheet.FormatProviders.Pdf" Version="2020.1.212" />
+    <PackageReference Include="Telerik.Documents.SpreadsheetStreaming" Version="2020.1.212" />
+    <PackageReference Include="TMS.FlexCel" Version="7.6.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\newPSG.PMS.Core.Shared\newPSG.PMS.Core.Shared.csproj" />
+  </ItemGroup>
+</Project>
