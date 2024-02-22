@@ -12,6 +12,9 @@ import { IndexComponent } from './index.component';
 import { LayoutTabManagerService } from '@app/shared/layout-tab/layout-tab-manager/layout-tab-manager.service';
 import { LayoutTabModule } from '@app/shared/layout-tab/layout-tab.module';
 import { OraMapModComService } from '@app/shared/layout-tab/ora-map-mod-com.service';
+import { DashboardDanhMucComponent } from './dashboard-danh-muc/dashboard-danh-muc.component';
+import { DanhMucTaiKhoanComponent } from './danh-muc-tai-khoan/danh-muc-tai-khoan.component';
+import { CreateOrEditDanhMucTaiKhoan } from './danh-muc-tai-khoan/create-or-edit-danh-muc-tai-khoan.component';
 
 @NgModule({
     imports: [
@@ -26,9 +29,7 @@ import { OraMapModComService } from '@app/shared/layout-tab/ora-map-mod-com.serv
         SharedModule,
         LayoutTabModule,
     ],
-    declarations: [
-        IndexComponent],
+    declarations: [IndexComponent, DashboardDanhMucComponent, DanhMucTaiKhoanComponent, CreateOrEditDanhMucTaiKhoan],
     providers: [OraMapModComService, LayoutTabManagerService],
 })
-export class DanhMucModule {
-}
+export class DanhMucModule {}

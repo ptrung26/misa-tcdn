@@ -8,28 +8,29 @@ import {
     forwardRef,
     EventEmitter,
     Output,
-    OnDestroy, OnChanges, TemplateRef
+    OnDestroy,
+    OnChanges,
+    TemplateRef,
 } from '@angular/core';
-import {Observable, of, Subscription} from 'rxjs';
-import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {ISelectOption, ISelectOptions, SelectOptions} from './model';
-import {mergeMap} from 'rxjs/operators';
-import {AppUtilityService} from '@app/shared/common/custom/utility.service';
+import { Observable, of, Subscription } from 'rxjs';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ISelectOption, ISelectOptions, SelectOptions } from './model';
+import { mergeMap } from 'rxjs/operators';
+import { AppUtilityService } from '@app/shared/common/custom/utility.service';
 
 const VALUE_ACCESSOR: Provider = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => OraSelectComponent),
-    multi: true
+    multi: true,
 };
 
 @Component({
     selector: 'ora-select',
     templateUrl: './ora-select.component.html',
     styleUrls: ['./ora-select.component.scss'],
-    providers: [VALUE_ACCESSOR]
+    providers: [VALUE_ACCESSOR],
 })
 export class OraSelectComponent implements OnInit, ControlValueAccessor, OnDestroy, OnChanges {
-
     options: ISelectOption[] = [];
     optionsSource: ISelectOption[] = [];
     @Input() refNotFound: TemplateRef<any> | string = 'Không tìm thấy...';
@@ -37,7 +38,6 @@ export class OraSelectComponent implements OnInit, ControlValueAccessor, OnDestr
     @Input() closeOnSelect = false;
     @Input() control = new FormControl(null);
     @Input() allowClear = true;
-
 
     @Input()
     selectMode?: 'default' | 'multiple' | 'tags' = 'default';
@@ -64,10 +64,8 @@ export class OraSelectComponent implements OnInit, ControlValueAccessor, OnDestr
         this._isDisabled = v;
     }
 
-    private onChange = (v: any) => {
-    };
-    private onTouched = () => {
-    };
+    private onChange = (v: any) => {};
+    private onTouched = () => {};
 
     onChangeValue(event: any): void {
         this.onChange(event);
@@ -78,33 +76,27 @@ export class OraSelectComponent implements OnInit, ControlValueAccessor, OnDestr
         this.onTouched();
     }
 
-
     search(value: string): void {
         value = AppUtilityService.removeDau(value);
-        this.options = this.optionsSource.filter((s) => AppUtilityService.removeDau(s.displayText.toLowerCase()).indexOf(value.toLowerCase()) !== -1);
+        this.options = this.optionsSource.filter(
+            (s) => AppUtilityService.removeDau(s.displayText.toLowerCase()).indexOf(value.toLowerCase()) !== -1,
+        );
     }
 
-
-    constructor(
-        @Optional() @Inject(SelectOptions) private directive: ISelectOptions
-    ) {
+    constructor(@Optional() @Inject(SelectOptions) private directive: ISelectOptions) {
         if (directive) {
-            directive.options$.subscribe(ressult => {
-                this.options = ressult;
-                this.optionsSource = ressult;
+            directive.options$.subscribe((result) => {
+                this.options = result;
+                this.optionsSource = result;
             });
         }
     }
 
-    ngOnDestroy(): void {
-    }
+    ngOnDestroy(): void {}
 
-    ngOnInit(): void {
+    ngOnInit(): void {}
 
-    }
-
-    ngOnChanges(changes: import('@angular/core').SimpleChanges): void {
-    }
+    ngOnChanges(changes: import('@angular/core').SimpleChanges): void {}
 
     //#region base ControlValueAccessor
     writeValue(obj: any): void {
@@ -124,6 +116,4 @@ export class OraSelectComponent implements OnInit, ControlValueAccessor, OnDestr
     }
 
     //#endregion
-
-
 }

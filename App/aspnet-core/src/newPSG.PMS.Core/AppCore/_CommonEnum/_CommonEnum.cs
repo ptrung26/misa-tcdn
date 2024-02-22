@@ -21,7 +21,7 @@ namespace newPSG
             public string Name { get; set; }
         }
 
-       
+
 
         //public static List<EnumObj> EnumToList(Type TypeObject)
         //{
@@ -100,6 +100,31 @@ namespace newPSG
                 this.DisplayString = text;
             }
         }
+
+        #region Tính chất tài khoản 
+        public enum TINH_CHAT_TAI_KHOAN
+        {
+            [EnumDisplayString("Không có số dư")]
+            KhongCoSoDu = 0,
+            [EnumDisplayString("Dư nợ")]
+            DuNo = 1,
+            [EnumDisplayString("Dư có")]
+            DuCo = 2,
+            [EnumDisplayString("Lưỡng tính")]
+            LuongTinh = 3,
+        }
+        #endregion
+
+        #region Trạng thái tài khoản 
+        public enum TRANG_THAI_TAI_KHOAN
+        {
+            [EnumDisplayString("Ngừng sử dụng")]
+            InActive = 0,
+            [EnumDisplayString("Đang sử dụng")]
+            Active = 1,
+
+        }
+        #endregion
 
 
 

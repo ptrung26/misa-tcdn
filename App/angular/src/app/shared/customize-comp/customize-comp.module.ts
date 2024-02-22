@@ -40,6 +40,9 @@ import { OraListSwitchComponent } from './ora-list-switch/ora-list-switch.compon
 import { TextMaskModule } from 'angular2-text-mask';
 import { OraLayoutFilterComponent } from './ora-layout-filter/ora-layout-filter.component';
 import { OraPageHeaderComponent } from './ora-page-header/ora-page-header.component';
+import { BaseTemplateOverLayComponent } from './ora-overlay/base-template-overlay.component';
+import { OverlayTriggerDirective } from './ora-overlay/overlay-trigger.directive';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 const com = [
     SafePipe,
@@ -69,9 +72,12 @@ const com = [
     ReplaceSomeTextPipe,
     OraStepsComponent,
     OraStepComponent,
-    OraSwitchComponent, OraListSwitchComponent,
+    OraSwitchComponent,
+    OraListSwitchComponent,
     OraLayoutFilterComponent,
     OraPageHeaderComponent,
+    BaseTemplateOverLayComponent,
+    OverlayTriggerDirective,
 ];
 
 @NgModule({
@@ -87,12 +93,10 @@ const com = [
         CountoModule,
         ColorPickerModule,
         NzOutletModule,
+        OverlayModule,
     ],
     declarations: [...com],
-    exports: [...com, ],
+    exports: [...com],
     providers: [],
 })
-export class CustomizeCompModule {
-
-}
-
+export class CustomizeCompModule {}

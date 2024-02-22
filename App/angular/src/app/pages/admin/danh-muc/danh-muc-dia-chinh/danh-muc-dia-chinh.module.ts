@@ -15,12 +15,14 @@ import { TinhComponent } from './tinh/tinh.component';
 import { CreateOrEditTinhComponent } from './tinh/create-or-edit.component';
 import { SHARED_ZORRO_MODULES } from '@shared/shared-zorro.module';
 
-
 @NgModule({
     declarations: [
-        TinhComponent, CreateOrEditTinhComponent,
-        HuyenComponent, CreateOrEditHuyenComponent,
-        XaComponent, CreateOrEditXaComponent,
+        TinhComponent,
+        CreateOrEditTinhComponent,
+        HuyenComponent,
+        CreateOrEditHuyenComponent,
+        XaComponent,
+        CreateOrEditXaComponent,
     ],
     imports: [
         CommonModule,
@@ -35,5 +37,4 @@ import { SHARED_ZORRO_MODULES } from '@shared/shared-zorro.module';
         ...SHARED_ZORRO_MODULES,
     ],
 })
-export class DanhMucDiaChinhModule {
-}
+export class DanhMucDiaChinhModule {}

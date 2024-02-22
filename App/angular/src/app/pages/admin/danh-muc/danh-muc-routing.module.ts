@@ -1,19 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IndexComponent } from '@app/pages/admin/danh-muc/index.component';
+import { DanhMucTaiKhoanComponent } from './danh-muc-tai-khoan/danh-muc-tai-khoan.component';
 const routes: Routes = [
     {
-        path: '',
-        component: IndexComponent,
-        data: { permission: 'Pages.DanhMuc' },
-        children: [
-            {
-                path: 'dia-chinh',
-                loadChildren: () => import('./danh-muc-dia-chinh/danh-muc-dia-chinh.module').then(m => m.DanhMucDiaChinhModule), // Lazy load main module
-                data: { preload: true },
-            },
-
-        ],
+        path: 'dm_taikhoan',
+        component: DanhMucTaiKhoanComponent,
+        data: { permission: 'Pages.DanhMuc.TaiKhoan' },
     },
 ];
 
@@ -22,5 +14,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class DanhMucRoutingModule {
-}
+export class DanhMucRoutingModule {}

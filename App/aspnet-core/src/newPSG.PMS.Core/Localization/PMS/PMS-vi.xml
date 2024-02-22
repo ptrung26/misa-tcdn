@@ -794,6 +794,19 @@
 		<text name="medium">Mật khẩu bình thường</text>
 		<text name="strong">Mật khẩu mạnh</text>
 		<text name="veryStrong">Mật khẩu rất mạnh</text>
+		
+		<!--Table Form-->
+		<text name="Table_Btn_Add">Thêm mới</text>
+		<text name="Table_TaiKhoan_Title">Hệ thống tài khoản</text>
+		<text name="Table_Export_TaiKhoan_Excel">Xuất danh sách tài khoản ra excel</text>
+		<text name="Table_Filter_TaiKhoan_Placeholder">Tìm kiếm theo số, tên tài khoản</text>
+		<text name="Table_Header_TaiKhoan_SoTaiKhoan">Số tài khoản</text>
+	  <text name="Table_Header_TaiKhoan_TenTaiKhoan">Tên tài khoản</text>
+	  <text name="Table_Header_TaiKhoan_TinhChat">Tính chất</text>
+	  <text name="Table_Header_TaiKhoan_TenTiengAnh">Tên tiếng anh</text>
+	  <text name="Table_Header_TaiKhoan_DienGiai">Diễn giải</text>
+	  <text name="Table_Header_TaiKhoan_TrangThai">Trạng thái</text>
+	  <text name="Table_Header_TaiKhoan_ChucNang">Chức năng</text>
 
 		<!--Danh mục-->
 		<text name="Dashboard_BS">Dashboard BS</text>
@@ -803,6 +816,8 @@
 		<text name="Pages_DanhMuc_Tinh">Danh mục Tỉnh</text>
 		<text name="Pages_DanhMuc_Huyen">Danh mục Huyện</text>
 		<text name="Pages_DanhMuc_Xa">Danh mục Xã</text>
+		<text name="Pages_DanhMuc_TaiKhoan">Danh mục Tài Khoản</text>
+		<text name="Pages_DanhMuc_TienMat">Danh mục Tiền Mặt</text>
 
 		<text name="ExcelOperations">Excel</text>
 		<text name="ImportToExcelSampleFileDownloadInfo">{0} để tải dữ liệu mẫu</text>

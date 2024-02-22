@@ -20,7 +20,6 @@ namespace newPSG.PMS.Entities
         [MaxLength(100)]
         public string TenTaiKhoan { get; set; }
 
-        [Required]
         public string TenTiengAnh { get; set; }
 
         [Required]

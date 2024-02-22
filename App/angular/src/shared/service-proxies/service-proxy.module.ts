@@ -36,9 +36,10 @@ import { ZeroTemplateHttpConfigurationService } from './zero-template-http-confi
         ApiServiceProxies.DanhMucHuyenServiceProxy,
         ApiServiceProxies.DanhMucTinhServiceProxy,
         ApiServiceProxies.DanhMucXaServiceProxy,
+        ApiServiceProxies.DanhMucTaiKhoanServiceProxy,
         { provide: RefreshTokenService, useClass: ZeroRefreshTokenService },
         { provide: AbpHttpConfigurationService, useClass: ZeroTemplateHttpConfigurationService },
-        { provide: HTTP_INTERCEPTORS, useClass: AbpHttpInterceptor, multi: true }
-    ]
+        { provide: HTTP_INTERCEPTORS, useClass: AbpHttpInterceptor, multi: true },
+    ],
 })
-export class ServiceProxyModule { }
+export class ServiceProxyModule {}

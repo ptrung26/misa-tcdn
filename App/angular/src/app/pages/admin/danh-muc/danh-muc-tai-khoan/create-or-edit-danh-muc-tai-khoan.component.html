@@ -1,0 +1,254 @@
+<nz-content class="cu-form">
+    <ora-page-header [title]="headerTitle" [action]="action">
+        <ng-template #action>
+            <div nz-row nzGutter="8" nzAlign="middle">
+                <div nz-col>
+                    <button nz-button nzType="text" nzShape="circle">
+                        <i nz-icon nzType="close"></i>
+                    </button>
+                </div>
+                <div nz-col>
+                    <button nz-button nzType="text" nzShape="circle">
+                        <i nz-icon nzType="info-circle" nzTheme="outline"></i>
+                    </button>
+                </div>
+            </div>
+        </ng-template>
+    </ora-page-header>
+
+    <form nz-form [formGroup]="rfForm">
+        {{rfForm.value| json}}
+        <div nz-row nzGutter="24">
+            <div nz-col nzLg="6" nzMd="6">
+                <nz-form-item>
+                    <nz-form-label nzFlex="1 0 100%" nzRequired="true">Số tài khoản</nz-form-label>
+                    <nz-form-control [nzErrorTip]="errSoTaiKhoan">
+                        <input nz-input autoFocus formControlName="soTaiKhoan" />
+                        <ng-template #errSoTaiKhoan let-control>
+                            <ng-container *ngIf="control.errors?.required">
+                                Phải nhập số tài khoản
+                            </ng-container>
+                            <ng-container *ngIf="control.errors?.passwordLength">
+                                Số tài khoản phải lớn hơn hoặc bằng 3
+                            </ng-container>
+                            <ng-container *ngIf="control.errors?.khongTrungTaiKhoanCha">
+                                Số tài khoản phải bắt đầu bằng tài khoản tổng hợp
+                            </ng-container>
+                            <ng-container *ngIf="control.errors?.soTaikhoanIsExist">
+                                Số tài khoản đã tồn tại
+                            </ng-container>
+                        </ng-template>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzLg="8" nzMd="8">
+                <nz-form-item>
+                    <nz-form-label nzFlex="1 0 100%" nzRequired="true">Tên tài khoản</nz-form-label>
+                    <nz-form-control [nzErrorTip]="errTenTaiKhoan">
+                        <input nz-input formControlName="tenTaiKhoan" />
+                        <ng-template #errTenTaiKhoan let-control>
+                            <ng-container *ngIf="control.errors?.required">
+                                Phải nhập tên tài khoản
+                            </ng-container>
+                        </ng-template>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row nzGutter="24">
+            <div nz-col nzLg="6" nzMd="6">
+                <nz-form-item>
+                    <nz-form-label nzFlex="1 0 100%">Tài khoản tổng hợp</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="parentId" [elTrigger]="dropdown" />
+                        <base-template-overlay #dropdown>
+                            <nz-table #general [nzBordered]="true" [nzData]="accountGeneral" [nzShowPagination]="false">
+                                <thead>
+                                    <tr>
+                                        <th>Số tài khoản</th>
+                                        <th>Tên tài khoản</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngFor="let account of general.data ">
+                                        <tr (click)="addParentAccount(account)">
+                                            <td>{{account.soTaiKhoan}}</td>
+                                            <td>{{account.tenTaiKhoan}}</td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </nz-table>
+                        </base-template-overlay>
+
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzLg="6" nzMd="6">
+                <nz-form-item>
+                    <nz-form-label nzFlex="1 0 100%" nzRequired="true">Tính chất</nz-form-label>
+                    <nz-form-control>
+                        <ora-select tinhChatDirective formControlName="tinhChat"></ora-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row>
+            <div nz-col nzFlex="1">
+                <nz-form-item>
+                    <nz-form-label nzFlex="1 0 100%">Diễn giải</nz-form-label>
+                    <nz-form-control>
+                        <textarea nz-input formControlName="dienGiai"></textarea>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row>
+            <div nz-col>
+                <nz-form-item>
+                    <label nz-checkbox formControlName="coHachToanNgoaiTe">Có hạch toán ngoại
+                        tệ</label>
+                </nz-form-item>
+            </div>
+        </div>
+        <p>
+            <i nz-icon nzType="down"></i>
+            Theo dõi chi tiết theo
+        </p>
+        <ng-container>
+            <div nz-row nzGutter="24">
+                <div nz-col nzLg="12">
+                    <nz-form-item>
+                        <nz-form-control nzLg="12"><label nz-checkbox formControlName="coDoiTuong"
+                                (ngModelChange)="onCheckBoxChange($event, 'doiTuong')">Đối
+                                tượng</label></nz-form-control>
+                        <nz-form-control nzLg="12"><ora-select formControlName="doiTuong" doiTuongDirective
+                                [disabled]="!rfForm.value.coDoiTuong"></ora-select></nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col nzLg="12">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <label nz-checkbox formControlName="coTaiKhoanNganHang">Có tài khoản ngân
+                                hàng</label>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+            <div nz-row nzGutter="24">
+                <div nz-col nzLg="12">
+                    <nz-form-item>
+                        <nz-form-control nzLg="12">
+                            <label nz-checkbox formControlName="coDoiTuongTHCP"
+                                (ngModelChange)="onCheckBoxChange($event, 'doiTuongTHCP')">Đối tượng
+                                THCP</label>
+                        </nz-form-control>
+                        <nz-form-control nzLg="12">
+                            <ora-select formControlName="doiTuongTHCP" inputWarningDirective
+                                [disabled]="!rfForm.value.coDoiTuongTHCP"></ora-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col nzLg="12">
+                    <nz-form-item>
+                        <nz-form-control nzLg="12">
+                            <label nz-checkbox formControlName="coCongTrinh"
+                                (ngModelChange)="onCheckBoxChange($event, 'congTrinh')">Công trình</label>
+                        </nz-form-control>
+                        <nz-form-control nzLg="12">
+                            <ora-select formControlName="congTrinh" inputWarningDirective
+                                [disabled]="!rfForm.value.coCongTrinh"></ora-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+            <div nz-row nzGutter="24">
+                <div nz-col nzLg="12">
+                    <nz-form-item>
+                        <nz-form-control nzLg="12">
+                            <label nz-checkbox formControlName="coDonDatHang"
+                                (ngModelChange)="onCheckBoxChange($event, 'donDatHang')">Đơn đặt hàng</label>
+                        </nz-form-control>
+                        <nz-form-control nzLg="12">
+                            <ora-select formControlName="donDatHang" [disabled]="!rfForm.value.coDonDatHang"
+                                inputWarningDirective></ora-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col nzLg="12">
+                    <nz-form-item>
+                        <nz-form-control nzLg="12">
+                            <label nz-checkbox formControlName="coHopDongBan"
+                                (ngModelChange)="onCheckBoxChange($event, 'hopDongBan')">Hợp đồng bán</label>
+                        </nz-form-control>
+                        <nz-form-control nzLg="12">
+                            <ora-select formControlName="hopDongBan" inputWarningDirective
+                                [disabled]="!rfForm.value.coHopDongBan"></ora-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+            <div nz-row nzGutter="24">
+                <div nz-col nzLg="12">
+                    <nz-form-item>
+                        <nz-form-control nzLg="12">
+                            <label nz-checkbox formControlName="coHopDongMua"
+                                (ngModelChange)="onCheckBoxChange($event, 'hopDongMua')">Hợp đồng mua</label>
+                        </nz-form-control>
+                        <nz-form-control nzLg="12">
+                            <ora-select formControlName="hopDongMua" inputWarningDirective
+                                [disabled]="!rfForm.value.coHopDongMua"></ora-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col nzLg="12">
+                    <nz-form-item>
+                        <nz-form-control nzLg="12">
+                            <label nz-checkbox formControlName="coKhoanMucCP"
+                                (ngModelChange)="onCheckBoxChange($event, 'khoanMucCP')">Khoản mục CP</label>
+                        </nz-form-control>
+                        <nz-form-control nzLg="12">
+                            <ora-select formControlName="khoanMucCP" inputWarningDirective
+                                [disabled]="!rfForm.value.coKhoanMucCP"></ora-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+            <div nz-row nzGutter="24">
+                <div nz-col nzLg="12">
+                    <nz-form-item>
+                        <nz-form-control nzLg="12">
+                            <label nz-checkbox formControlName="coDonVi"
+                                (ngModelChange)="onCheckBoxChange($event, 'donVi')">Đơn vị</label>
+                        </nz-form-control>
+                        <nz-form-control nzLg="12">
+                            <ora-select formControlName="donVi" inputWarningDirective
+                                [disabled]="!rfForm.value.coDonVi"></ora-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col nzLg="12">
+                    <nz-form-item>
+                        <nz-form-control nzLg="12">
+                            <label nz-checkbox formControlName="coMaThongKe"
+                                (ngModelChange)="onCheckBoxChange($event, 'maThongKe')">Mã thống kê</label>
+                        </nz-form-control>
+                        <nz-form-control nzLg="12">
+                            <ora-select formControlName="maThongKe" inputWarningDirective
+                                [disabled]="!rfForm.value.coMaThongKe"></ora-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+        </ng-container>
+
+    </form>
+    <div nz-row nzJustify="space-between" class="form-acions">
+        <div nz-col>
+            <button nz-button (click)="close()">Hủy</button>
+        </div>
+        <div nz-col>
+            <button nz-button (click)="submit(true)">Cất</button>
+            <button nz-button nzType="primary" (click)="submit(false)">Cất và thêm</button>
+        </div>
+    </div>
+</nz-content>

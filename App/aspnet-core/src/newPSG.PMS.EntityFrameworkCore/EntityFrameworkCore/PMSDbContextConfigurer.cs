@@ -1,5 +1,6 @@
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace newPSG.PMS.EntityFrameworkCore
 {
@@ -9,6 +10,7 @@ namespace newPSG.PMS.EntityFrameworkCore
         {
             // builder.UseSqlServer(connectionString);
             builder.UseMySql(connectionString);
+            builder.UseLoggerFactory(LoggerFactory.Create(__buider => __buider.AddConsole()));
         }
 
         public static void Configure(DbContextOptionsBuilder<PMSDbContext> builder, DbConnection connection)

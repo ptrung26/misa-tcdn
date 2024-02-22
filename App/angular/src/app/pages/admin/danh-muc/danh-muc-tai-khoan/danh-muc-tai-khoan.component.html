@@ -1,0 +1,79 @@
+<ng-container *ngIf="showList == 1; else addNew">
+    <ora-page-header title="{{'Table_TaiKhoan_Title' | localize}}" [action]="action">
+        <ng-template #action>
+            <div nz-row nzGutter="12">
+                <div nz-col><button class="margin-left-5" (click)="showCreateOrEditDanhMucTaiKhoan()" nz-button
+                        nzType="primary">{{"Table_Btn_Add" |
+                        localize}}</button></div>
+                <div nz-col>
+                    <dropdown-up-excel [itemMenu1]="exportExcel">
+                        <ng-template #exportExcel>
+                            <button nz-button (click)="exportDanhMucTaiKhoan()" nzType="text">
+                                <i nz-icon nzType="export"></i>
+                                {{'Table_Export_TaiKhoan_Excel' | localize}}
+                            </button>
+                        </ng-template>
+                    </dropdown-up-excel>
+                </div>
+            </div>
+        </ng-template>
+    </ora-page-header>
+    <ora-layout-filter (onSearch)="refresh()">
+        <form nz-form #filterForm="ngForm">
+            <nz-form-item>
+                <nz-form-control nzLg="6">
+                    <input nz-input name="filter" [(ngModel)]="filter" [style]="'width: 240px;'"
+                        placeholder="{{'Table_Filter_TaiKhoan_Placeholder' | localize}}" />
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ora-layout-filter>
+
+    <nz-table [nzData]="dataList" [nzFrontPagination]="false" [nzTotal]="totalItems" [(nzPageIndex)]="pageNumber"
+        [(nzPageSize)]="pageSize" [nzShowPagination]="true" [nzLoading]="dataList?.length === 0" nzBordered="true">
+        <thead>
+            <tr>
+                <th>{{"Table_Header_TaiKhoan_SoTaiKhoan" | localize}}</th>
+                <th>{{"Table_Header_TaiKhoan_TenTaiKhoan" | localize}}</th>
+                <th>{{"Table_Header_TaiKhoan_TinhChat" | localize}}</th>
+                <th>{{"Table_Header_TaiKhoan_TenTiengAnh" | localize}}</th>
+                <th>{{"Table_Header_TaiKhoan_DienGiai" | localize}}</th>
+                <th>{{"Table_Header_TaiKhoan_TrangThai" | localize}}</th>
+                <th>{{"Table_Header_TaiKhoan_ChucNang" | localize}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dataItem of dataList">
+                <td>{{dataItem.soTaiKhoan}}</td>
+                <td>{{dataItem.tenTaiKhoan}}</td>
+                <td>{{dataItem.tinhChat}}</td>
+                <td>{{dataItem.tenTiengAnh}}</td>
+                <td>{{dataItem.dienGiai}}</td>
+                <td>{{dataItem.isActive === true ? "Đang sử dụng" : "Ngừng sử dụng"}}</td>
+                <td>
+                    <button nz-button nz-dropdown [nzDropdownMenu]="menu">
+                        Action
+                        <span nz-icon nzType="down"></span>
+                    </button>
+                    <nz-dropdown-menu #menu="nzDropdownMenu">
+                        <ul nz-menu>
+                            <li nz-menu-item>
+                                <a (click)="showCreateOrEditDanhMucTaiKhoan(dataItem)">Edit</a>
+                            </li>
+                            <li nz-menu-item>
+                                <a>{{dataItem.trangThai === 0 ? 'Set active' : 'Set inactive'}}</a>
+                            </li>
+                            <li nz-menu-item>
+                                <a>Delete</a>
+                            </li>
+                        </ul>
+                    </nz-dropdown-menu>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</ng-container>
+<ng-template #addNew>
+    <create-or-edit-danh-muc-tai-khoan [dataItem]="dataItem"
+        (backListEvent)="backList()"></create-or-edit-danh-muc-tai-khoan>
+</ng-template>

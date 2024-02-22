@@ -1795,116 +1795,6 @@ export class CommonLookupServiceProxy {
         }
         return _observableOf<ItemObjOfInt32[]>(<any>null);
     }
-
-    /**
-     * @return Success
-     */
-    getListGioiTinh(): Observable<ItemObjOfInt32[]> {
-        let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetListGioiTinh";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetListGioiTinh(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetListGioiTinh(<any>response_);
-                } catch (e) {
-                    return <Observable<ItemObjOfInt32[]>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<ItemObjOfInt32[]>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processGetListGioiTinh(response: HttpResponseBase): Observable<ItemObjOfInt32[]> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (Array.isArray(resultData200)) {
-                result200 = [] as any;
-                for (let item of resultData200)
-                    result200!.push(ItemObjOfInt32.fromJS(item));
-            }
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<ItemObjOfInt32[]>(<any>null);
-    }
-
-    /**
-     * @return Success
-     */
-    getListUserLevel(): Observable<ItemObjOfInt32[]> {
-        let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetListUserLevel";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetListUserLevel(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetListUserLevel(<any>response_);
-                } catch (e) {
-                    return <Observable<ItemObjOfInt32[]>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<ItemObjOfInt32[]>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processGetListUserLevel(response: HttpResponseBase): Observable<ItemObjOfInt32[]> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (Array.isArray(resultData200)) {
-                result200 = [] as any;
-                for (let item of resultData200)
-                    result200!.push(ItemObjOfInt32.fromJS(item));
-            }
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<ItemObjOfInt32[]>(<any>null);
-    }
 }
 
 @Injectable()
@@ -2483,6 +2373,294 @@ export class DanhMucQuocTichServiceProxy {
             }));
         }
         return _observableOf<ReturnReponseOfUnit>(<any>null);
+    }
+}
+
+@Injectable()
+export class DanhMucTaiKhoanServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    delete(id: number | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/DanhMucTaiKhoan/Delete?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    insertOrUpdate(body: DanhMucTaiKhoanUpsertRequest | undefined): Observable<number> {
+        let url_ = this.baseUrl + "/api/services/app/DanhMucTaiKhoan/InsertOrUpdate";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processInsertOrUpdate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processInsertOrUpdate(<any>response_);
+                } catch (e) {
+                    return <Observable<number>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<number>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processInsertOrUpdate(response: HttpResponseBase): Observable<number> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 !== undefined ? resultData200 : <any>null;
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<number>(<any>null);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    pagingListRequest(body: DanhMucTaiKhoanPagingListRequest | undefined): Observable<PagedResultDtoOfDanhMucTaiKhoanDto> {
+        let url_ = this.baseUrl + "/api/services/app/DanhMucTaiKhoan/PagingListRequest";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processPagingListRequest(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processPagingListRequest(<any>response_);
+                } catch (e) {
+                    return <Observable<PagedResultDtoOfDanhMucTaiKhoanDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PagedResultDtoOfDanhMucTaiKhoanDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processPagingListRequest(response: HttpResponseBase): Observable<PagedResultDtoOfDanhMucTaiKhoanDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PagedResultDtoOfDanhMucTaiKhoanDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PagedResultDtoOfDanhMucTaiKhoanDto>(<any>null);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    exportToExcelRequest(body: ExportDanhMucTaiKhoanRequest | undefined): Observable<FileDto> {
+        let url_ = this.baseUrl + "/api/services/app/DanhMucTaiKhoan/ExportToExcelRequest";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processExportToExcelRequest(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processExportToExcelRequest(<any>response_);
+                } catch (e) {
+                    return <Observable<FileDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processExportToExcelRequest(response: HttpResponseBase): Observable<FileDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = FileDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileDto>(<any>null);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    isSoTaiKhoanExist(body: CheckValidSoTaiKhoanRequest | undefined): Observable<boolean> {
+        let url_ = this.baseUrl + "/api/services/app/DanhMucTaiKhoan/IsSoTaiKhoanExist";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processIsSoTaiKhoanExist(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processIsSoTaiKhoanExist(<any>response_);
+                } catch (e) {
+                    return <Observable<boolean>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<boolean>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processIsSoTaiKhoanExist(response: HttpResponseBase): Observable<boolean> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 !== undefined ? resultData200 : <any>null;
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<boolean>(<any>null);
     }
 }
 
@@ -17121,6 +17299,578 @@ export interface IReturnReponseOfUnit {
     error: ErrorResponse | undefined;
 }
 
+export class DanhMucTaiKhoanUpsertRequest implements IDanhMucTaiKhoanUpsertRequest {
+    id!: number | undefined;
+    soTaiKhoan!: string;
+    tenTaiKhoan!: string;
+    tenTiengAnh!: string | undefined;
+    tinhChat!: number;
+    dienGiai!: string | undefined;
+    coHachToanNgoaiTe!: boolean;
+    doiTuong!: number | undefined;
+    doiTuongTHCP!: number | undefined;
+    donDatHang!: number | undefined;
+    hopDongMua!: number | undefined;
+    donVi!: number | undefined;
+    coTaiKhoanNganHang!: boolean;
+    congTrinh!: number | undefined;
+    hopDongBan!: number | undefined;
+    khoanMucCP!: number | undefined;
+    maThongKe!: number | undefined;
+    isActive!: boolean;
+    totalChild!: number;
+    parentId!: number | undefined;
+
+    constructor(data?: IDanhMucTaiKhoanUpsertRequest) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.soTaiKhoan = _data["soTaiKhoan"];
+            this.tenTaiKhoan = _data["tenTaiKhoan"];
+            this.tenTiengAnh = _data["tenTiengAnh"];
+            this.tinhChat = _data["tinhChat"];
+            this.dienGiai = _data["dienGiai"];
+            this.coHachToanNgoaiTe = _data["coHachToanNgoaiTe"];
+            this.doiTuong = _data["doiTuong"];
+            this.doiTuongTHCP = _data["doiTuongTHCP"];
+            this.donDatHang = _data["donDatHang"];
+            this.hopDongMua = _data["hopDongMua"];
+            this.donVi = _data["donVi"];
+            this.coTaiKhoanNganHang = _data["coTaiKhoanNganHang"];
+            this.congTrinh = _data["congTrinh"];
+            this.hopDongBan = _data["hopDongBan"];
+            this.khoanMucCP = _data["khoanMucCP"];
+            this.maThongKe = _data["maThongKe"];
+            this.isActive = _data["isActive"];
+            this.totalChild = _data["totalChild"];
+            this.parentId = _data["parentId"];
+        }
+    }
+
+    static fromJS(data: any): DanhMucTaiKhoanUpsertRequest {
+        data = typeof data === 'object' ? data : {};
+        let result = new DanhMucTaiKhoanUpsertRequest();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["soTaiKhoan"] = this.soTaiKhoan;
+        data["tenTaiKhoan"] = this.tenTaiKhoan;
+        data["tenTiengAnh"] = this.tenTiengAnh;
+        data["tinhChat"] = this.tinhChat;
+        data["dienGiai"] = this.dienGiai;
+        data["coHachToanNgoaiTe"] = this.coHachToanNgoaiTe;
+        data["doiTuong"] = this.doiTuong;
+        data["doiTuongTHCP"] = this.doiTuongTHCP;
+        data["donDatHang"] = this.donDatHang;
+        data["hopDongMua"] = this.hopDongMua;
+        data["donVi"] = this.donVi;
+        data["coTaiKhoanNganHang"] = this.coTaiKhoanNganHang;
+        data["congTrinh"] = this.congTrinh;
+        data["hopDongBan"] = this.hopDongBan;
+        data["khoanMucCP"] = this.khoanMucCP;
+        data["maThongKe"] = this.maThongKe;
+        data["isActive"] = this.isActive;
+        data["totalChild"] = this.totalChild;
+        data["parentId"] = this.parentId;
+        return data; 
+    }
+}
+
+export interface IDanhMucTaiKhoanUpsertRequest {
+    id: number | undefined;
+    soTaiKhoan: string;
+    tenTaiKhoan: string;
+    tenTiengAnh: string | undefined;
+    tinhChat: number;
+    dienGiai: string | undefined;
+    coHachToanNgoaiTe: boolean;
+    doiTuong: number | undefined;
+    doiTuongTHCP: number | undefined;
+    donDatHang: number | undefined;
+    hopDongMua: number | undefined;
+    donVi: number | undefined;
+    coTaiKhoanNganHang: boolean;
+    congTrinh: number | undefined;
+    hopDongBan: number | undefined;
+    khoanMucCP: number | undefined;
+    maThongKe: number | undefined;
+    isActive: boolean;
+    totalChild: number;
+    parentId: number | undefined;
+}
+
+export class DanhMucTaiKhoanPagingListRequest implements IDanhMucTaiKhoanPagingListRequest {
+    filter!: string | undefined;
+    readonly filterFullText!: string | undefined;
+    readonly mySqlFullTextSearch!: string | undefined;
+    sorting!: string | undefined;
+    maxResultCount!: number;
+    skipCount!: number;
+
+    constructor(data?: IDanhMucTaiKhoanPagingListRequest) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.filter = _data["filter"];
+            (<any>this).filterFullText = _data["filterFullText"];
+            (<any>this).mySqlFullTextSearch = _data["mySqlFullTextSearch"];
+            this.sorting = _data["sorting"];
+            this.maxResultCount = _data["maxResultCount"];
+            this.skipCount = _data["skipCount"];
+        }
+    }
+
+    static fromJS(data: any): DanhMucTaiKhoanPagingListRequest {
+        data = typeof data === 'object' ? data : {};
+        let result = new DanhMucTaiKhoanPagingListRequest();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["filter"] = this.filter;
+        data["filterFullText"] = this.filterFullText;
+        data["mySqlFullTextSearch"] = this.mySqlFullTextSearch;
+        data["sorting"] = this.sorting;
+        data["maxResultCount"] = this.maxResultCount;
+        data["skipCount"] = this.skipCount;
+        return data; 
+    }
+}
+
+export interface IDanhMucTaiKhoanPagingListRequest {
+    filter: string | undefined;
+    filterFullText: string | undefined;
+    mySqlFullTextSearch: string | undefined;
+    sorting: string | undefined;
+    maxResultCount: number;
+    skipCount: number;
+}
+
+export class DanhMucTaiKhoanEntity implements IDanhMucTaiKhoanEntity {
+    soTaiKhoan!: string;
+    tenTaiKhoan!: string;
+    tenTiengAnh!: string | undefined;
+    tinhChat!: number;
+    dienGiai!: string | undefined;
+    coHachToanNgoaiTe!: boolean;
+    doiTuong!: number | undefined;
+    doiTuongTHCP!: number | undefined;
+    donDatHang!: number | undefined;
+    hopDongMua!: number | undefined;
+    donVi!: number | undefined;
+    coTaiKhoanNganHang!: boolean;
+    congTrinh!: number | undefined;
+    hopDongBan!: number | undefined;
+    khoanMucCP!: number | undefined;
+    maThongKe!: number | undefined;
+    grade!: number;
+    totalChild!: number;
+    isParent!: boolean;
+    isActive!: boolean;
+    parent!: DanhMucTaiKhoanEntity | undefined;
+    isDeleted!: boolean;
+    deleterUserId!: number | undefined;
+    deletionTime!: DateTime | undefined;
+    lastModificationTime!: DateTime | undefined;
+    lastModifierUserId!: number | undefined;
+    creationTime!: DateTime;
+    creatorUserId!: number | undefined;
+    id!: number;
+
+    constructor(data?: IDanhMucTaiKhoanEntity) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.soTaiKhoan = _data["soTaiKhoan"];
+            this.tenTaiKhoan = _data["tenTaiKhoan"];
+            this.tenTiengAnh = _data["tenTiengAnh"];
+            this.tinhChat = _data["tinhChat"];
+            this.dienGiai = _data["dienGiai"];
+            this.coHachToanNgoaiTe = _data["coHachToanNgoaiTe"];
+            this.doiTuong = _data["doiTuong"];
+            this.doiTuongTHCP = _data["doiTuongTHCP"];
+            this.donDatHang = _data["donDatHang"];
+            this.hopDongMua = _data["hopDongMua"];
+            this.donVi = _data["donVi"];
+            this.coTaiKhoanNganHang = _data["coTaiKhoanNganHang"];
+            this.congTrinh = _data["congTrinh"];
+            this.hopDongBan = _data["hopDongBan"];
+            this.khoanMucCP = _data["khoanMucCP"];
+            this.maThongKe = _data["maThongKe"];
+            this.grade = _data["grade"];
+            this.totalChild = _data["totalChild"];
+            this.isParent = _data["isParent"];
+            this.isActive = _data["isActive"];
+            this.parent = _data["parent"] ? DanhMucTaiKhoanEntity.fromJS(_data["parent"]) : <any>undefined;
+            this.isDeleted = _data["isDeleted"];
+            this.deleterUserId = _data["deleterUserId"];
+            this.deletionTime = _data["deletionTime"] ? DateTime.fromISO(_data["deletionTime"].toString()) : <any>undefined;
+            this.lastModificationTime = _data["lastModificationTime"] ? DateTime.fromISO(_data["lastModificationTime"].toString()) : <any>undefined;
+            this.lastModifierUserId = _data["lastModifierUserId"];
+            this.creationTime = _data["creationTime"] ? DateTime.fromISO(_data["creationTime"].toString()) : <any>undefined;
+            this.creatorUserId = _data["creatorUserId"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): DanhMucTaiKhoanEntity {
+        data = typeof data === 'object' ? data : {};
+        let result = new DanhMucTaiKhoanEntity();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["soTaiKhoan"] = this.soTaiKhoan;
+        data["tenTaiKhoan"] = this.tenTaiKhoan;
+        data["tenTiengAnh"] = this.tenTiengAnh;
+        data["tinhChat"] = this.tinhChat;
+        data["dienGiai"] = this.dienGiai;
+        data["coHachToanNgoaiTe"] = this.coHachToanNgoaiTe;
+        data["doiTuong"] = this.doiTuong;
+        data["doiTuongTHCP"] = this.doiTuongTHCP;
+        data["donDatHang"] = this.donDatHang;
+        data["hopDongMua"] = this.hopDongMua;
+        data["donVi"] = this.donVi;
+        data["coTaiKhoanNganHang"] = this.coTaiKhoanNganHang;
+        data["congTrinh"] = this.congTrinh;
+        data["hopDongBan"] = this.hopDongBan;
+        data["khoanMucCP"] = this.khoanMucCP;
+        data["maThongKe"] = this.maThongKe;
+        data["grade"] = this.grade;
+        data["totalChild"] = this.totalChild;
+        data["isParent"] = this.isParent;
+        data["isActive"] = this.isActive;
+        data["parent"] = this.parent ? this.parent.toJSON() : <any>undefined;
+        data["isDeleted"] = this.isDeleted;
+        data["deleterUserId"] = this.deleterUserId;
+        data["deletionTime"] = this.deletionTime ? this.deletionTime.toString() : <any>undefined;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toString() : <any>undefined;
+        data["lastModifierUserId"] = this.lastModifierUserId;
+        data["creationTime"] = this.creationTime ? this.creationTime.toString() : <any>undefined;
+        data["creatorUserId"] = this.creatorUserId;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface IDanhMucTaiKhoanEntity {
+    soTaiKhoan: string;
+    tenTaiKhoan: string;
+    tenTiengAnh: string | undefined;
+    tinhChat: number;
+    dienGiai: string | undefined;
+    coHachToanNgoaiTe: boolean;
+    doiTuong: number | undefined;
+    doiTuongTHCP: number | undefined;
+    donDatHang: number | undefined;
+    hopDongMua: number | undefined;
+    donVi: number | undefined;
+    coTaiKhoanNganHang: boolean;
+    congTrinh: number | undefined;
+    hopDongBan: number | undefined;
+    khoanMucCP: number | undefined;
+    maThongKe: number | undefined;
+    grade: number;
+    totalChild: number;
+    isParent: boolean;
+    isActive: boolean;
+    parent: DanhMucTaiKhoanEntity | undefined;
+    isDeleted: boolean;
+    deleterUserId: number | undefined;
+    deletionTime: DateTime | undefined;
+    lastModificationTime: DateTime | undefined;
+    lastModifierUserId: number | undefined;
+    creationTime: DateTime;
+    creatorUserId: number | undefined;
+    id: number;
+}
+
+export class DanhMucTaiKhoanDto implements IDanhMucTaiKhoanDto {
+    id!: number;
+    soTaiKhoan!: string | undefined;
+    tenTaiKhoan!: string | undefined;
+    tenTiengAnh!: string | undefined;
+    tinhChat!: number;
+    dienGiai!: string | undefined;
+    coHachToanNgoaiTe!: boolean;
+    doiTuong!: number | undefined;
+    doiTuongTHCP!: number | undefined;
+    donDatHang!: number | undefined;
+    hopDongMua!: number | undefined;
+    donVi!: number | undefined;
+    coTaiKhoanNganHang!: boolean;
+    congTrinh!: number | undefined;
+    hopDongBan!: number | undefined;
+    khoanMucCP!: number | undefined;
+    maThongKe!: number | undefined;
+    grade!: number;
+    isParent!: boolean;
+    isActive!: boolean;
+    parent!: DanhMucTaiKhoanEntity | undefined;
+
+    constructor(data?: IDanhMucTaiKhoanDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.soTaiKhoan = _data["soTaiKhoan"];
+            this.tenTaiKhoan = _data["tenTaiKhoan"];
+            this.tenTiengAnh = _data["tenTiengAnh"];
+            this.tinhChat = _data["tinhChat"];
+            this.dienGiai = _data["dienGiai"];
+            this.coHachToanNgoaiTe = _data["coHachToanNgoaiTe"];
+            this.doiTuong = _data["doiTuong"];
+            this.doiTuongTHCP = _data["doiTuongTHCP"];
+            this.donDatHang = _data["donDatHang"];
+            this.hopDongMua = _data["hopDongMua"];
+            this.donVi = _data["donVi"];
+            this.coTaiKhoanNganHang = _data["coTaiKhoanNganHang"];
+            this.congTrinh = _data["congTrinh"];
+            this.hopDongBan = _data["hopDongBan"];
+            this.khoanMucCP = _data["khoanMucCP"];
+            this.maThongKe = _data["maThongKe"];
+            this.grade = _data["grade"];
+            this.isParent = _data["isParent"];
+            this.isActive = _data["isActive"];
+            this.parent = _data["parent"] ? DanhMucTaiKhoanEntity.fromJS(_data["parent"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): DanhMucTaiKhoanDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new DanhMucTaiKhoanDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["soTaiKhoan"] = this.soTaiKhoan;
+        data["tenTaiKhoan"] = this.tenTaiKhoan;
+        data["tenTiengAnh"] = this.tenTiengAnh;
+        data["tinhChat"] = this.tinhChat;
+        data["dienGiai"] = this.dienGiai;
+        data["coHachToanNgoaiTe"] = this.coHachToanNgoaiTe;
+        data["doiTuong"] = this.doiTuong;
+        data["doiTuongTHCP"] = this.doiTuongTHCP;
+        data["donDatHang"] = this.donDatHang;
+        data["hopDongMua"] = this.hopDongMua;
+        data["donVi"] = this.donVi;
+        data["coTaiKhoanNganHang"] = this.coTaiKhoanNganHang;
+        data["congTrinh"] = this.congTrinh;
+        data["hopDongBan"] = this.hopDongBan;
+        data["khoanMucCP"] = this.khoanMucCP;
+        data["maThongKe"] = this.maThongKe;
+        data["grade"] = this.grade;
+        data["isParent"] = this.isParent;
+        data["isActive"] = this.isActive;
+        data["parent"] = this.parent ? this.parent.toJSON() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface IDanhMucTaiKhoanDto {
+    id: number;
+    soTaiKhoan: string | undefined;
+    tenTaiKhoan: string | undefined;
+    tenTiengAnh: string | undefined;
+    tinhChat: number;
+    dienGiai: string | undefined;
+    coHachToanNgoaiTe: boolean;
+    doiTuong: number | undefined;
+    doiTuongTHCP: number | undefined;
+    donDatHang: number | undefined;
+    hopDongMua: number | undefined;
+    donVi: number | undefined;
+    coTaiKhoanNganHang: boolean;
+    congTrinh: number | undefined;
+    hopDongBan: number | undefined;
+    khoanMucCP: number | undefined;
+    maThongKe: number | undefined;
+    grade: number;
+    isParent: boolean;
+    isActive: boolean;
+    parent: DanhMucTaiKhoanEntity | undefined;
+}
+
+export class PagedResultDtoOfDanhMucTaiKhoanDto implements IPagedResultDtoOfDanhMucTaiKhoanDto {
+    totalCount!: number;
+    items!: DanhMucTaiKhoanDto[] | undefined;
+
+    constructor(data?: IPagedResultDtoOfDanhMucTaiKhoanDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.totalCount = _data["totalCount"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(DanhMucTaiKhoanDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PagedResultDtoOfDanhMucTaiKhoanDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PagedResultDtoOfDanhMucTaiKhoanDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalCount"] = this.totalCount;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IPagedResultDtoOfDanhMucTaiKhoanDto {
+    totalCount: number;
+    items: DanhMucTaiKhoanDto[] | undefined;
+}
+
+export class ExportDanhMucTaiKhoanRequest implements IExportDanhMucTaiKhoanRequest {
+    filter!: string | undefined;
+    readonly filterFullText!: string | undefined;
+    readonly mySqlFullTextSearch!: string | undefined;
+    sorting!: string | undefined;
+    maxResultCount!: number;
+    skipCount!: number;
+
+    constructor(data?: IExportDanhMucTaiKhoanRequest) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.filter = _data["filter"];
+            (<any>this).filterFullText = _data["filterFullText"];
+            (<any>this).mySqlFullTextSearch = _data["mySqlFullTextSearch"];
+            this.sorting = _data["sorting"];
+            this.maxResultCount = _data["maxResultCount"];
+            this.skipCount = _data["skipCount"];
+        }
+    }
+
+    static fromJS(data: any): ExportDanhMucTaiKhoanRequest {
+        data = typeof data === 'object' ? data : {};
+        let result = new ExportDanhMucTaiKhoanRequest();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["filter"] = this.filter;
+        data["filterFullText"] = this.filterFullText;
+        data["mySqlFullTextSearch"] = this.mySqlFullTextSearch;
+        data["sorting"] = this.sorting;
+        data["maxResultCount"] = this.maxResultCount;
+        data["skipCount"] = this.skipCount;
+        return data; 
+    }
+}
+
+export interface IExportDanhMucTaiKhoanRequest {
+    filter: string | undefined;
+    filterFullText: string | undefined;
+    mySqlFullTextSearch: string | undefined;
+    sorting: string | undefined;
+    maxResultCount: number;
+    skipCount: number;
+}
+
+export class CheckValidSoTaiKhoanRequest implements ICheckValidSoTaiKhoanRequest {
+    soTaiKhoan!: string;
+
+    constructor(data?: ICheckValidSoTaiKhoanRequest) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.soTaiKhoan = _data["soTaiKhoan"];
+        }
+    }
+
+    static fromJS(data: any): CheckValidSoTaiKhoanRequest {
+        data = typeof data === 'object' ? data : {};
+        let result = new CheckValidSoTaiKhoanRequest();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["soTaiKhoan"] = this.soTaiKhoan;
+        return data; 
+    }
+}
+
+export interface ICheckValidSoTaiKhoanRequest {
+    soTaiKhoan: string;
+}
+
 export class DanhMucTinhPagingListMediatorRequest implements IDanhMucTinhPagingListMediatorRequest {
     filter!: string | undefined;
     readonly filterFullText!: string | undefined;
@@ -28328,13 +29078,6 @@ export class User implements IUser {
     signInToken!: string | undefined;
     googleAuthenticatorKey!: string | undefined;
     organizationUnits!: UserOrganizationUnit[] | undefined;
-    level!: number | undefined;
-    jsonTinhQuanLy!: string | undefined;
-    donViCoSoId!: number | undefined;
-    maCoSo!: string | undefined;
-    tinhId!: number | undefined;
-    huyenId!: number | undefined;
-    xaId!: number | undefined;
     normalizedUserName!: string;
     normalizedEmailAddress!: string;
     concurrencyStamp!: string | undefined;
@@ -28396,13 +29139,6 @@ export class User implements IUser {
                 for (let item of _data["organizationUnits"])
                     this.organizationUnits!.push(UserOrganizationUnit.fromJS(item));
             }
-            this.level = _data["level"];
-            this.jsonTinhQuanLy = _data["jsonTinhQuanLy"];
-            this.donViCoSoId = _data["donViCoSoId"];
-            this.maCoSo = _data["maCoSo"];
-            this.tinhId = _data["tinhId"];
-            this.huyenId = _data["huyenId"];
-            this.xaId = _data["xaId"];
             this.normalizedUserName = _data["normalizedUserName"];
             this.normalizedEmailAddress = _data["normalizedEmailAddress"];
             this.concurrencyStamp = _data["concurrencyStamp"];
@@ -28488,13 +29224,6 @@ export class User implements IUser {
             for (let item of this.organizationUnits)
                 data["organizationUnits"].push(item.toJSON());
         }
-        data["level"] = this.level;
-        data["jsonTinhQuanLy"] = this.jsonTinhQuanLy;
-        data["donViCoSoId"] = this.donViCoSoId;
-        data["maCoSo"] = this.maCoSo;
-        data["tinhId"] = this.tinhId;
-        data["huyenId"] = this.huyenId;
-        data["xaId"] = this.xaId;
         data["normalizedUserName"] = this.normalizedUserName;
         data["normalizedEmailAddress"] = this.normalizedEmailAddress;
         data["concurrencyStamp"] = this.concurrencyStamp;
@@ -28569,13 +29298,6 @@ export interface IUser {
     signInToken: string | undefined;
     googleAuthenticatorKey: string | undefined;
     organizationUnits: UserOrganizationUnit[] | undefined;
-    level: number | undefined;
-    jsonTinhQuanLy: string | undefined;
-    donViCoSoId: number | undefined;
-    maCoSo: string | undefined;
-    tinhId: number | undefined;
-    huyenId: number | undefined;
-    xaId: number | undefined;
     normalizedUserName: string;
     normalizedEmailAddress: string;
     concurrencyStamp: string | undefined;

@@ -34,11 +34,10 @@ namespace newPSG.PMS.DanhMucHuyenManagement.Business
         public async Task<PagedResultDto<DanhMucTaiKhoanDto>> Handle(DanhMucTaiKhoanPagingListRequest request, CancellationToken cancellationToken)
         {
             request.Format();
-            var query = (from t in _tkRepos.GetAll() select t.MapTo<DanhMucTaiKhoanDto>())
-                .WhereIf(!string.IsNullOrEmpty(request.Filter), tk => EF.Functions.Like(tk.TenTaiKhoan, request.Filter) || EF.Functions.Like(tk.SoTaiKhoan, request.Filter));
+            var query = (from t in _tkRepos.GetAll() select t).WhereIf(!string.IsNullOrEmpty(request.Filter), tk => EF.Functions.Like(tk.TenTaiKhoan, request.FilterFullText) || EF.Functions.Like(tk.SoTaiKhoan, request.FilterFullText)).Select(_t => _t.MapTo<DanhMucTaiKhoanDto>()).AsNoTracking();
+
 
             var dataGrids = await query
-              .OrderBy("id asc")
               .PageBy(request)
               .ToListAsync(cancellationToken);
 

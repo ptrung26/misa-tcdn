@@ -7,13 +7,12 @@ import { Observable, Subject, of } from 'rxjs';
 
 @Injectable()
 export class AppRouteGuard implements CanActivate, CanActivateChild, CanLoad {
-
     constructor(
         private _permissionChecker: PermissionCheckerService,
         private _router: Router,
         private _sessionService: AppSessionService,
-        private _refreshTokenService: RefreshTokenService
-    ) { }
+        private _refreshTokenService: RefreshTokenService,
+    ) {}
 
     canActivateInternal(data: any, state: RouterStateSnapshot): Observable<boolean> {
         if (UrlHelper.isInstallUrl(location.href)) {
@@ -23,25 +22,24 @@ export class AppRouteGuard implements CanActivate, CanActivateChild, CanLoad {
         if (!this._sessionService.user) {
             let sessionObservable = new Subject<any>();
 
-            this._refreshTokenService.tryAuthWithRefreshToken()
-                .subscribe(
-                    (autResult: boolean) => {
-                        if (autResult) {
-                            sessionObservable.next(true);
-                            sessionObservable.complete();
-                            location.reload();
-                        } else {
-                            sessionObservable.next(false);
-                            sessionObservable.complete();
-                            this._router.navigate(['/account/login']);
-                        }
-                    },
-                    (error) => {
+            this._refreshTokenService.tryAuthWithRefreshToken().subscribe(
+                (autResult: boolean) => {
+                    if (autResult) {
+                        sessionObservable.next(true);
+                        sessionObservable.complete();
+                        location.reload();
+                    } else {
                         sessionObservable.next(false);
                         sessionObservable.complete();
                         this._router.navigate(['/account/login']);
                     }
-                );
+                },
+                (error) => {
+                    sessionObservable.next(false);
+                    sessionObservable.complete();
+                    this._router.navigate(['/account/login']);
+                },
+            );
             return sessionObservable;
         }
 
@@ -70,7 +68,6 @@ export class AppRouteGuard implements CanActivate, CanActivateChild, CanLoad {
     }
 
     selectBestRoute(): string {
-
         if (!this._sessionService.user) {
             return '/account/login';
         }

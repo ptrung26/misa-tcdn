@@ -32,16 +32,21 @@ namespace newPSG.PMS.DanhMucTaiKhoanManagement
 
         public async Task<PagedResultDto<DanhMucTaiKhoanDto>> PagingListRequest(DanhMucTaiKhoanPagingListRequest request)
         {
-            try
-            {
-                var result = await _mediator.Send(request);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                throw new UserFriendlyException(ex.Message);
-            }
+            var result = await _mediator.Send(request);
+            return result;
 
+        }
+
+        public async Task<FileDto> ExportToExcelRequest(ExportDanhMucTaiKhoanRequest request)
+        {
+            var result = await _mediator.Send(request);
+            return result;
+        }
+
+        public async Task<bool> IsSoTaiKhoanExist(CheckValidSoTaiKhoanRequest request)
+        {
+            var result = await _mediator.Send(request);
+            return result;
         }
     }
 }

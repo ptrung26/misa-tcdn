@@ -102,7 +102,12 @@ namespace newPSG.PMS.Authorization
             var danhMuc = pages.CreateChildPermission(AppPermissions.Pages_DanhMuc, L("Pages_DanhMuc"));
             danhMuc.CreateChildPermission(AppPermissions.Pages_DanhMuc_Tinh, L("Pages_DanhMuc_Tinh"));
             danhMuc.CreateChildPermission(AppPermissions.Pages_DanhMuc_Huyen, L("Pages_DanhMuc_Huyen"));
-            danhMuc.CreateChildPermission(AppPermissions.Pages_DanhMuc_Xa, L("Pages_DanhMuc_Xa"));
+            danhMuc.CreateChildPermission(name: AppPermissions.Pages_DanhMuc_Xa, L("Pages_DanhMuc_Xa"));
+
+            // MISA Danh Muc
+            danhMuc.CreateChildPermission(name: AppPermissions.Pages_DanhMuc_TaiKhoan, L("Pages_DanhMuc_TaiKhoan"));
+            danhMuc.CreateChildPermission(name: AppPermissions.Pages_DanhMuc_TienMat, L("Pages_DanhMuc_TienMat"));
+
 
             #endregion
 

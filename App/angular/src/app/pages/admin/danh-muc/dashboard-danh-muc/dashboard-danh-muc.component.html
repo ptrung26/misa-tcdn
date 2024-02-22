@@ -1,6 +1,6 @@
 <div class="form-area">
     <input [formControl]="filterContr" class="search__input" type="text"
-           placeholder="Nhập tên chức năng để tìm kiếm...">
+        placeholder="Nhập tên chức năng để tìm kiếm...">
 </div>
 <nz-card>
     <nz-row nzGutter="16">
@@ -23,9 +23,7 @@
         <nz-col nzSpan="18">
             <nz-list nzItemLayout="horizontal">
                 <nz-list-item *ngFor="let dataItem of $menuItems |async" (click)="addTab(dataItem)" class="item-menu">
-                    <nz-list-item-meta
-                        [nzAvatar]="getImgLink(dataItem.iconSrc)"
-                    >
+                    <nz-list-item-meta [nzAvatar]="getImgLink(dataItem.iconSrc)">
                         <nz-list-item-meta-title>
                             {{dataItem.title|localize}}
                         </nz-list-item-meta-title>

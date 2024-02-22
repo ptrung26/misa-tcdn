@@ -6,6 +6,7 @@ using newPSG.PMS.Dto;
 using newPSG.PMS.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,6 +29,31 @@ namespace newPSG.PMS.DanhMucTaiKhoanManagement.Bussiness
 
         public async Task<int> Handle(DanhMucTaiKhoanUpsertRequest request, CancellationToken cancellationToken)
         {
+
+            // Validate 
+            if (request.SoTaiKhoan.Length < 3)
+            {
+                throw new UserFriendlyException("Số tài khoản không được nhỏ hơn 3");
+            }
+
+            if (request.ParentId.HasValue)
+            {
+                var parent = await _tkRepos.GetAsync(request.ParentId.Value);
+                if (parent != null)
+                {
+                    if (!request.SoTaiKhoan.StartsWith(parent.SoTaiKhoan))
+                    {
+                        throw new UserFriendlyException("Số tài khoản phải bắt đầu bằng tài khoản tổng hợp");
+                    }
+                }
+            }
+
+            var existAccount = _tkRepos.GetAll().FirstOrDefault(tk => tk.SoTaiKhoan == request.SoTaiKhoan);
+            if (existAccount != null)
+            {
+                throw new UserFriendlyException("Số tài khoản đã tồn tại");
+            }
+
             // Nếu request là update 
             if (request.Id > 0)
             {
@@ -45,6 +71,7 @@ namespace newPSG.PMS.DanhMucTaiKhoanManagement.Bussiness
                             tk.Parent.IsParent = false;
                         }
 
+                        tk.Parent = null;
                     }
 
                     // Nếu thông tin tài khoản mới có tài khoản cha 
@@ -56,8 +83,8 @@ namespace newPSG.PMS.DanhMucTaiKhoanManagement.Bussiness
                         {
                             newParent.IsParent = true;
                             newParent.TotalChild += 1;
+                            tk.Parent = newParent;
                         }
-
                         _tkRepos.Update(newParent);
 
                     }
@@ -73,6 +100,8 @@ namespace newPSG.PMS.DanhMucTaiKhoanManagement.Bussiness
             }
             else
             {
+                var insertInput = request.MapTo<DanhMucTaiKhoanEntity>();
+
                 // Nếu thông tin tài khoản mới có tài khoản cha 
                 if (request.ParentId.HasValue)
                 {
@@ -83,9 +112,10 @@ namespace newPSG.PMS.DanhMucTaiKhoanManagement.Bussiness
                         newParent.IsParent = true;
                         newParent.TotalChild += 1;
                     }
+                    insertInput.Parent = newParent;
+                    await _tkRepos.UpdateAsync(newParent);
                 }
 
-                var insertInput = request.MapTo<DanhMucTaiKhoanEntity>();
                 return await _tkRepos.InsertAndGetIdAsync(insertInput);
             }
         }

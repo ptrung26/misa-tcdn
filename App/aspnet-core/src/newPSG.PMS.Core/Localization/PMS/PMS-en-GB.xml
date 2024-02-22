@@ -926,5 +926,19 @@
     <text name="strong">Strong</text>
     <text name="veryStrong">Very Strong</text>
     <text name="QuickNav">Quick Nav</text>
+	  
+	 <!--Table Form-->
+	  <text name="Table_Btn_Add">Add</text>
+	  <text name="Table_TaiKhoan_Title">Account System</text>
+	  <text name="Table_Export_TaiKhoan_Excel">Export Account list to excel</text>
+	  <text name="Table_Filter_TaiKhoan_Placeholder">Find by account name or account number</text>
+	  <text name="Table_Header_TaiKhoan_SoTaiKhoan">Account number</text>
+	  <text name="Table_Header_TaiKhoan_TenTaiKhoan">Account name</text>
+	  <text name="Table_Header_TaiKhoan_TinhChat">Property</text>
+	  <text name="Table_Header_TaiKhoan_TenTiengAnh">English Name</text>
+	  <text name="Table_Header_TaiKhoan_DienGiai">Description</text>
+	  <text name="Table_Header_TaiKhoan_TrangThai">Status</text>
+	  <text name="Table_Header_TaiKhoan_ChucNang">Feature</text>
+
   </texts>
 </localizationDictionary>

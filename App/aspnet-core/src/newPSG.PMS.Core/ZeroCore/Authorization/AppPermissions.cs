@@ -78,6 +78,7 @@
         public const string Pages_Administration_Host_Settings = "Pages.Administration.Host.Settings";
         public const string Pages_Administration_Host_Dashboard = "Pages.Administration.Host.Dashboard";
 
+
         #region Dashboard
         public const string Pages_Dashboard_BS = "Pages.Dashboard_BS";
         public const string Pages_Dashboard_NBT = "Pages.Dashboard_NBT";
@@ -88,6 +89,10 @@
         public const string Pages_DanhMuc_Tinh = "Pages.DanhMuc.Tinh";
         public const string Pages_DanhMuc_Huyen = "Pages.DanhMuc.Huyen";
         public const string Pages_DanhMuc_Xa = "Pages.DanhMuc.Xa";
+
+        // MISA Danh mục
+        public const string Pages_DanhMuc_TienMat = "Pages.DanhMuc.TienMat";
+        public const string Pages_DanhMuc_TaiKhoan = "Pages.DanhMuc.TaiKhoan";
         #endregion
 
         #region Đơn vị cơ sở
